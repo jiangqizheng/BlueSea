@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body,
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      .word-row {
+        padding: 4px;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+      }
+
+      .word-row:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .word-row:hover .word-options {
+        display: block;
+      }
+
+      .word-options {
+        display: none;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .btn {
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px 16px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .btn:hover {
+        background: rgba(9, 30, 66, 0.2);
+      }
+      .btn_hover {
+        background: rgba(9, 30, 66, 0.08);
+      }
+
+      .btn_hover:hover {
+        background: rgba(9, 30, 66, 0.2);
+      }
+
+      .btn_hover:active {
+        background: #e4f0f6;
+      }
+
+      /* super-card */
+
+      .card {
+        position: relative;
+        border-radius: 16px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        transition: all 240ms;
+        transform-style: preserve-3d;
+      }
+
+      .r-card {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 1);
+        backface-visibility: hidden;
+      }
+
+      .card_back {
+        background: #fff;
+        color: #000;
+        transform: rotateY(180deg);
+        overflow-y: auto;
+      }
+
+      .card_back::-webkit-scrollbar {
+        width: 0 !important;
+      }
+
+      .card_content {
+        position: relative;
+        z-index: 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+      }
+    </style>
+    <script src="../lib/codemirror/codemirror.js"></script>
+    <script src="../lib/codemirror/javascript.js"></script>
+    <link rel="stylesheet" href="../lib/codemirror/codemirror.css" />
+    <script src="../lib/dayjs.js"></script>
+    <script src="../lib/standalone.module.mini.js"></script>
+    <script src="../logic.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

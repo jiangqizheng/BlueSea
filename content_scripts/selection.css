@@ -1,0 +1,24 @@
+xmark.gloab-xmark {
+  padding: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
+  text-decoration-style: wavy;
+  text-decoration-color: rgb(57, 136, 255);
+  text-decoration-line: underline;
+  text-decoration-skip-ink: none;
+  position: relative;
+}
+
+xmark.gloab-xmark:hover {
+  font-style: normal;
+  
+  padding: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 3px;
+  border-radius: 3px;
+  text-decoration: none;
+
+  color: rgb(255, 255, 255);
+  background: rgb(57, 136, 255);
+}
