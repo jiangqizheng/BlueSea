@@ -66,7 +66,6 @@ const listenMouseup = (e) => {
           };
           await materialsDB.set([...l, material]);
           selectedAxTip.clear();
-          highlighter.render()
         },
       });
     }

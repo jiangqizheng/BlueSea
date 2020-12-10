@@ -354,7 +354,7 @@ class Highlighter {
   watch() {
     this.watchTimer = setInterval(async () => {
       this.render();
-    }, 2 * 1000);
+    }, 3 * 1000);
 
     // const config = { attributes: true, childList: true, subtree: true };
     // this.observer = new MutationObserver((mutations, observer) => {
@@ -373,23 +373,20 @@ class Highlighter {
     //   this.observer.observe(document, config);
     // });
     // this.observer.observe(document, config);
-    // chrome.storage.onChanged.addListener(this.onMaterialListChange);
+    chrome.storage.onChanged.addListener(this.onMaterialListChange);
   }
-  // onMaterialListChange = (changes, namespace) => {
-  //   if (namespace === 'local' && changes['materials']) {
-  //     if (this.observer) {
-  //       const value = changes['materials'].newValue;
-  //       this.targetList = value;
-  //       this.observer.disconnect();
-  //       this.render();
-  //       const config = { attributes: true, childList: true, subtree: true };
-  //       this.observer.observe(document, config);
-  //     }
-  //   }
-  // };
+  onMaterialListChange = (changes, namespace) => {
+    if (namespace === 'local' && changes['materials']) {
+      if (changes['materials'].newValue.length !== this.targetList.length) {
+        console.log('123', changes['materials'].newValue);
+        this.clear();
+        this.render();
+      }
+    }
+  };
   stopWatch() {
-    // chrome.storage.onChanged.removeListener(this.onMaterialListChange);
-    // this.observer.disconnect();
+    this.observer.disconnect();
+    chrome.storage.onChanged.removeListener(this.onMaterialListChange);
     clearInterval(this.watchTimer);
     this.clear();
   }
@@ -398,7 +395,6 @@ class Highlighter {
 const highlighter = new Highlighter();
 
 document.addEventListener('DOMContentLoaded', () => {
-
   funCtrl.run(
     '划词高亮域名黑名单',
     async () => {

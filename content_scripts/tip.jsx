@@ -252,7 +252,6 @@ function makeTipEl(root, options, isBottom) {
           min-height: 130px;
           display: flex;
           flex-direction: column;
-          overflow: hidden;
         }
         .bluesea-tip > * {
           box-sizing: border-box;

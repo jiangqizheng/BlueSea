@@ -60,7 +60,7 @@ const configDB = new Storage('config');
 
 const defaultConfig = {
   单词弹幕域名黑名单: [],
-  单词弹幕数量上限: 5,
+  单词弹幕数量上限: 10,
   划词高亮域名黑名单: [],
   自动发音: true,
   中文注解: true,

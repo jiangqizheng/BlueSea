@@ -179,37 +179,30 @@ const SuperCard = ({ material, needLearn }) => {
             setIsCardReverse(false);
           }}
         >
+        <div>
           <${TfCard} tfData=${material.youdao} />
-
+          </div>
           <div class="card_content">
             <div style="color: #888;">
-              <div style="margin-bottom: 8px;">
+              <div style="margin-bottom: 4px;">
                 <div>创建时间：</div>
                 <div>${material.ctime}</div>
               </div>
-              <div style="margin-bottom: 8px;">
+              <div style="margin-bottom: 4px;">
                 <div>学习等级</div>
                 <div>${material.learn.level}</div>
               </div>
-              <div style="margin-bottom: 8px;">
+              <div style="margin-bottom: 4px;">
                 <div>下一次学习时间</div>
                 <div>${material.learn.learnDate}</div>
               </div>
-              <div style="margin-bottom: 8px;">
+              <div style="margin-bottom: 4px;">
                 <div>当日词频</div>
                 <div>${bluesea.forStatisticTodayCount(material)}</div>
               </div>
-              <div style="margin-bottom: 8px;">
+              <div style="margin-bottom: 4px;">
                 <div>总词频</div>
                 <div>${bluesea.forStatisticAllCount(material)}</div>
-              </div>
-              <div style="margin-bottom: 8px;">
-                <div>上下文句子：</div>
-                <div>待开发</div>
-              </div>
-              <div style="margin-bottom: 8px;">
-                <div>单词来源：</div>
-                <div>待开发</div>
               </div>
             </div>
           </div>
@@ -499,7 +492,9 @@ const Material = () => {
       <${ModalSortRules}
         visible=${visibleModalSortRules}
         onClose=${(rule) => {
-          setSortRule(rule);
+          if (rule) {
+            setSortRule(rule);
+          }
           setVisibleModalSortRules(false);
         }}
       />
