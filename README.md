@@ -82,7 +82,7 @@ BlueSea，是一个有趣的英语学习扩展程序。支持划词翻译、单�
 下载代码
 
 ```bash
-git clone https://github.com/ververcpp/ChaZD.git
+git clone https://github.com/jiangqizheng/BlueSea
 ```
 
 翻译提示窗部分样式参考 [ChaZD](https://chrome.google.com/webstore/detail/chazd/nkiipedegbhbjmajlhpegcpcaacbfggp)
