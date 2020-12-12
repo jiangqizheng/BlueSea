@@ -1,4 +1,4 @@
-function makeBullet(root, { material, onOperate, destroy, autoAudio }) {
+function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSpeed }) {
   const App = () => {
     const ytlBulletRef = useRef();
     const ytlBulletContentRef = useRef();
@@ -156,7 +156,7 @@ function makeBullet(root, { material, onOperate, destroy, autoAudio }) {
           z-index: 2147483647;
           border-radius: 4px;
           padding: 8px;
-          animation: bluesea-bullet-animation 10s infinite linear 0s;
+          animation: bluesea-bullet-animation ${bulletSpeed}s infinite linear 0s;
         }
 
         @keyframes bluesea-bullet-animation {
@@ -182,8 +182,7 @@ class ButtelScreens {
   buttelList = [];
   config = {};
   async getConfig() {
-    this.config = await bluesea.getConfig();
-    return this.config;
+    return await bluesea.getConfig();;
   }
 
   async getOneMaterial() {
@@ -207,12 +206,13 @@ class ButtelScreens {
     this.buttelList.splice(i, 1);
   }
 
-  async makeButtel(material) {
+  async makeBullet(material) {
     const buttelRoot = document.createElement('div');
     buttelRoot.classList.add('bluesea', 'bluesea-bullet-screens');
     buttelRoot.style.userSelect = 'none';
     document.body.appendChild(buttelRoot);
-    makeBullet(buttelRoot, {
+    makeBulletApp(buttelRoot, {
+      bulletSpeed: this.config['单词弹幕速度'] || 10, //可能存在未更新配置的用户，后续将删除默认值
       autoAudio: this.config['自动发音'],
       material,
       onOperate: (flag) => {
@@ -234,15 +234,15 @@ class ButtelScreens {
 
   async start() {
     this.timer = setInterval(async () => {
-      const config = await this.getConfig();
+      this.config = await this.getConfig();
       const material = await this.getOneMaterial();
       if (!material) {
         return;
       }
-      if (this.buttelList.length > config['单词弹幕数量上限']) {
+      if (this.buttelList.length > this.config['单词弹幕数量上限']) {
         return;
       }
-      this.makeButtel(material);
+      this.makeBullet(material);
     }, 3000);
   }
   clear() {
