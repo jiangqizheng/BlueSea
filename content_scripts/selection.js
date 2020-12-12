@@ -48,23 +48,9 @@ const listenMouseup = (e) => {
 
       selectedAxTip.render(rangeRect, {
         text: selectText,
-        onMark: async (tf) => {
-          const text = tf.returnPhrase ? tf.returnPhrase[0] : tf.query;
-          const l = await bluesea.getMaterials();
-          const isExist = l.find((it) => it.text === text);
-          if (isExist) {
-            selectedAxTip.clear();
-            return;
-          }
-          const material = {
-            text,
-            translation: tf.translation[0],
-            ctime: dayjs().format(),
-            learn: bluesea.createLearnObj(),
-            // 保留完整数据，后面可能会使用
-            youdao: tf,
-          };
-          await materialsDB.set([...l, material]);
+        onMark: async (youdao) => {
+          const material = bluesea.createMaterialObj(youdao.query, youdao)
+          await bluesea.addMaterialObj(material)
           selectedAxTip.clear();
         },
       });

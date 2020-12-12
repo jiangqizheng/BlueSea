@@ -179,8 +179,8 @@ const SuperCard = ({ material, needLearn }) => {
             setIsCardReverse(false);
           }}
         >
-        <div>
-          <${TfCard} tfData=${material.youdao} />
+          <div>
+            <${TfCard} tfData=${material.youdao} />
           </div>
           <div class="card_content">
             <div style="color: #888;">
@@ -625,15 +625,8 @@ const Material = () => {
 
                       let result = [];
                       for (let it of l) {
-                        const tfData = await tf(it);
-                        const material = {
-                          text: it,
-                          translation: tfData.translation[0],
-                          ctime: dayjs().format(),
-                          learn: bluesea.createLearnObj(),
-                          // 保留完整数据，后面可能会使用
-                          youdao: tfData,
-                        };
+                        const youdao = await tf(it);
+                        const material = bluesea.createMaterialObj(it, youdao);
                         result.push(material);
                       }
 

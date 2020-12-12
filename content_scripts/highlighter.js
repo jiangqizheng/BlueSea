@@ -181,6 +181,7 @@ const forReadyNodes = async (materialList) => {
           const passedNode = nowEl.nextSibling;
           passedNode.splitText(it.text.length);
           // 切割完毕
+          // 在此处额外获取
           resultNodes.push({ node: passedNode, material: it });
           nowEl = passedNode.nextSibling;
           return true;
@@ -331,13 +332,34 @@ class Highlighter {
   config = {};
 
   async render() {
+
     this.targetList = await bluesea.getMaterials();
-    const nodes = await forReadyNodes(this.targetList);
+    // textExts
+    const l = this.targetList.reduce((pre, cur) => {
+      if (cur.textExts) {
+        const l2 = cur.textExts.map((it) => ({
+          ...cur,
+          text: it,
+          originalText: cur.text,
+        }));
+        return [...pre, ...l2, cur];
+      } else {
+        return [...pre, cur];
+      }
+    }, []);
+    let nodes = await forReadyNodes(l);
+    // textExts
+    nodes.forEach((it) => {
+      if (it.material.originalText) {
+        it.material.text = it.material.originalText;
+      }
+    });
+
     handleHighlighter(nodes, this.config['中文注解']);
+
     handleStatistics();
   }
-  clear() {
-    const nodes = document.querySelectorAll(`xmark[data-marked="true"]`);
+  handleClear(nodes) {
     nodes.forEach((el) => {
       const text = document.createTextNode(el.dataset.text);
       const p = el.parentNode;
@@ -345,16 +367,26 @@ class Highlighter {
       p.normalize();
     });
   }
-
+  clear() {
+    const nodes = document.querySelectorAll(`xmark[data-marked="true"]`);
+    this.handleClear(nodes);
+  }
+  smartClear() {
+    //  仅删除已经不存在的
+    const nodes = document.querySelectorAll(`xmark[data-marked="true"]`);
+    const l = Array.from(nodes).filter((it) => {
+      return !this.targetList.some(material => material.text === it.dataset.text);
+    });
+    this.handleClear(l);
+  }
   async initData() {
-    this.targetList = await bluesea.getMaterials();
     this.config = await bluesea.getConfig();
   }
 
   watch() {
     this.watchTimer = setInterval(async () => {
       this.render();
-    }, 3 * 1000);
+    }, 4 * 1000);
 
     // const config = { attributes: true, childList: true, subtree: true };
     // this.observer = new MutationObserver((mutations, observer) => {
@@ -378,8 +410,8 @@ class Highlighter {
   onMaterialListChange = (changes, namespace) => {
     if (namespace === 'local' && changes['materials']) {
       if (changes['materials'].newValue.length !== this.targetList.length) {
-        console.log('123', changes['materials'].newValue);
-        this.clear();
+        this.targetList = changes['materials'].newValue;
+        this.smartClear();
         this.render();
       }
     }

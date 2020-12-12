@@ -83,7 +83,17 @@ class BlueSea {
       count: '总词频（高->低）',
     },
   };
-  forgettingCurve = [5, 30, 12 * 60, 24 * 60, 2 * 24 * 60, 4 * 24 * 60, 7 * 24 * 60, 15 * 24 * 60, 30 * 24 * 60];
+  forgettingCurve = [
+    5,
+    30,
+    12 * 60,
+    24 * 60,
+    2 * 24 * 60,
+    4 * 24 * 60,
+    7 * 24 * 60,
+    15 * 24 * 60,
+    30 * 24 * 60,
+  ];
   // forgettingCurve = [0.5, 2, 4, 8, 16]; // 调试时使用
   constructor() {
     this.init();
@@ -122,6 +132,39 @@ class BlueSea {
   }
   async setMaterials(l) {
     return materialsDB.set(l);
+  }
+
+  createMaterialObj(text, youdao) {
+    let t = text;
+    let textExts = [];
+    if (youdao.returnPhrase) {
+      t = youdao.returnPhrase[0];
+      if (t.toLowerCase() !== text.toLowerCase()) {
+        textExts.push(text);
+      }
+    }
+
+    const material = {
+      text: t,
+      textExts,
+      translation: youdao.translation[0],
+      ctime: dayjs().format(),
+      learn: this.createLearnObj(),
+      // 保留完整数据，后面可能会使用
+      youdao,
+    };
+    return material;
+  }
+
+  async addMaterialObj(material) {
+    const l = await this.getMaterials()
+    const existMaterial = l.find((it) => it.text === material.text);
+    if (existMaterial) {
+      existMaterial.textExts = Array.from(new Set([...(existMaterial.textExts || []), ...material.textExts]))
+      await this.setMaterials(l)
+      return 
+    }
+    await this.setMaterials([...l, material])
   }
 
   async delMaterial(text) {
