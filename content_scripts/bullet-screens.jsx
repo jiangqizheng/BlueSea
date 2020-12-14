@@ -74,7 +74,7 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
       ${autoAudio
         ? html`<audio
             style="display: none"
-            src="http://dict.youdao.com/dictvoice?audio=${material.text}"
+            src="https://dict.youdao.com/dictvoice?audio=${material.text}"
             ref=${audioRef}
             preload="true"
           ></audio>`

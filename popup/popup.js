@@ -447,7 +447,7 @@ const formatDate = (minute) => {
   } else if (minute >= 60 && minute < 24 * 60) {
     return `${(minute / 60).toFixed(1)}小时`;
   } else if (minute >= 24 * 60) {
-    return `${minute / (24 * 60).toFixed(1)}天`;
+    return `${(minute / (24 * 60)).toFixed(1)}天`;
   } else {
     return '数据异常，请反馈';
   }
@@ -710,7 +710,7 @@ const Material = () => {
                 ${infoText}
               </div>
               <div
-                style="color: #888;margin-right: 16px;text-align: right;min-width: 24px;"
+                style="color: #888;margin-right: 0px;text-align: right;min-width: 24px;"
               >
                 ${countdown}
               </div>
@@ -718,7 +718,7 @@ const Material = () => {
 
             <div class="word-options">
               <span
-                style="color:#f00"
+                style="color:#f00; margin-left: 8px;"
                 onClick=${() => {
                   bluesea.delMaterial(it.text);
                 }}

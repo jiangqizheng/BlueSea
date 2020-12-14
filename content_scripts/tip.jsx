@@ -117,12 +117,12 @@ function makeTipEl(root, options, isBottom) {
       ${isOneWord
         ? config['自动发音']
           ? html`<audio
-              src="http://dict.youdao.com/dictvoice?audio=${tfData.query}"
+              src="https://dict.youdao.com/dictvoice?audio=${tfData.query}"
               ref=${audioRef}
               autoplay="true"
             ></audio>`
           : html`<audio
-              src="http://dict.youdao.com/dictvoice?audio=${tfData.query}"
+              src="https://dict.youdao.com/dictvoice?audio=${tfData.query}"
               ref=${audioRef}
               preload="true"
             ></audio>`
