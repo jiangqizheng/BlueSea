@@ -332,7 +332,6 @@ class Highlighter {
   config = {};
 
   async render() {
-
     this.targetList = await bluesea.getMaterials();
     // textExts
     const l = this.targetList.reduce((pre, cur) => {
@@ -375,7 +374,9 @@ class Highlighter {
     //  仅删除已经不存在的
     const nodes = document.querySelectorAll(`xmark[data-marked="true"]`);
     const l = Array.from(nodes).filter((it) => {
-      return !this.targetList.some(material => material.text === it.dataset.text);
+      return !this.targetList.some(
+        (material) => material.text === it.dataset.text
+      );
     });
     this.handleClear(l);
   }
@@ -417,7 +418,7 @@ class Highlighter {
     }
   };
   stopWatch() {
-    this.observer.disconnect();
+    // this.observer.disconnect();
     chrome.storage.onChanged.removeListener(this.onMaterialListChange);
     clearInterval(this.watchTimer);
     this.clear();
@@ -428,7 +429,7 @@ const highlighter = new Highlighter();
 
 document.addEventListener('DOMContentLoaded', () => {
   funCtrl.run(
-    '划词高亮域名黑名单',
+    '单词高亮',
     async () => {
       await highlighter.initData();
       highlighter.render();

@@ -267,7 +267,7 @@ const listenVisibilitychange = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   funCtrl.run(
-    '单词弹幕域名黑名单',
+    '单词弹幕',
     () => {
       document.addEventListener('visibilitychange', listenVisibilitychange);
       if (window.self === window.top) {

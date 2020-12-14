@@ -455,7 +455,7 @@ const formatDate = (minute) => {
 
 const Material = () => {
   const { list, sortRule, setSortRule } = bluesea.useMaterialsMate();
-  const config = bluesea.useConfig();
+  let config = bluesea.useConfig();
 
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   const [visibleModalSortRules, setVisibleModalSortRules] = useState(false);
@@ -792,7 +792,7 @@ const Btns = ({ value, onChange }) => {
 const Setting = () => {
   const ref = useRef();
   const editor = useRef();
-  const config = bluesea.useConfig();
+  let config = bluesea.useConfig();
 
   const url = bluesea.useTabUrl();
   let hostname = '';
@@ -819,8 +819,8 @@ const Setting = () => {
     })();
   }, [config]);
 
-  const key1 = '划词高亮域名黑名单';
-  const key2 = '单词弹幕域名黑名单';
+
+  config = config || {}
 
   return html`<div
     style="padding-bottom: 16px;height: 400px;overflow-y: auto; box-sizing: border-box;"
@@ -832,61 +832,95 @@ const Setting = () => {
         margin-top: 16px;
       }
     </style>
-    <div>
-      <div style="padding: 8px;">
-        <span> ${hostname} </span>
-        <span style="margin-left: 8px;color: #888">
-          (针对当前域名的快捷操作)
-        </span>
-      </div>
-      <div
-        style="display: flex;align-items: center; background: #fff; padding: 8px; border-bottom: 1px solid #f1f1f1"
-      >
-        <div style="flex: 1">划词高亮</div>
-        <${Btns}
-          value=${!((config || {})[key1] || []).some((it) => it === hostname)}
-          onChange=${async (flag) => {
-            const config = await bluesea.getConfig();
-            let list = [];
-            if (flag) {
-              list = config[key1].filter((it) => it !== hostname);
-            } else {
-              list = Array.from(new Set([...config[key1], hostname]));
-            }
-            const newConfig = {
-              ...config,
-              [key1]: list,
-            };
-            bluesea.setConfig(newConfig);
 
-            editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
-          }}
-        />
-      </div>
-      <div
-        style="display: flex; align-items: center; background: #fff; padding: 8px; "
-      >
-        <div style="flex: 1">单词弹幕</div>
-        <${Btns}
-          value=${!((config || {})[key2] || []).some((it) => it === hostname)}
-          onChange=${async (flag) => {
-            const config = await bluesea.getConfig();
-            let list = [];
-            if (flag) {
-              list = config[key2].filter((it) => it !== hostname);
-            } else {
-              list = Array.from(new Set([...config[key2], hostname]));
-            }
-            const newConfig = {
-              ...config,
-              [key2]: list,
-            };
-            bluesea.setConfig(newConfig);
+    <div style="padding: 8px;">
+      <span>基础功能启用</span>
+      <span style="margin-left: 8px;color: #888">
+        (快捷操作)
+      </span>
+    </div>
+    <div
+      style="display: flex;align-items: center; background: #fff; padding: 4px 8px; border-bottom: 1px solid #f1f1f1"
+    >
+      <div style="flex: 1">划词翻译</div>
+      <${Btns}
+        value=${config['划词翻译']}
+        onChange=${async (flag) => {
+          const c = await bluesea.getConfig();
+          const newConfig = {
+            ...c,
+            ['划词翻译']: flag,
+          };
+          bluesea.setConfig(newConfig);
+          editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
+        }}
+      />
+    </div>
+    <div
+      style="display: flex;align-items: center; background: #fff; padding:4px 8px; border-bottom: 1px solid #f1f1f1"
+    >
+      <div style="flex: 1">单词高亮</div>
+      <${Btns}
+        value=${config['单词高亮']}
+        onChange=${async (flag) => {
+          const c = await bluesea.getConfig();
+          const newConfig = {
+            ...c,
+            ['单词高亮']: flag,
+          };
+          bluesea.setConfig(newConfig);
+          editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
+        }}
+      />
+    </div>
+    <div
+      style="display: flex; align-items: center; background: #fff; padding: 4px 8px; "
+    >
+      <div style="flex: 1">单词弹幕</div>
+      <${Btns}
+        value=${config['单词弹幕']}
+        onChange=${async (flag) => {
+          const c = await bluesea.getConfig();
+          const newConfig = {
+            ...c,
+            ['单词弹幕']: flag,
+          };
+          bluesea.setConfig(newConfig);
+          editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
+        }}
+      />
+    </div>
 
-            editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
-          }}
-        />
-      </div>
+    <div style="padding: 8px;">
+      <span>是否在当前域名启用</span>
+      <span style="margin-left: 8px;color: #888">
+        (黑名单快捷操作)
+      </span>
+    </div>
+
+    <div
+      style="display: flex; align-items: center; background: #fff; padding: 4px 8px; "
+    >
+      <div style="flex: 1">${hostname}</div>
+      <${Btns}
+        value=${!((config || {})['黑名单'] || []).some((it) => it === hostname)}
+        onChange=${async (flag) => {
+          const c = await bluesea.getConfig();
+          let list = [];
+          if (flag) {
+            list = c['黑名单'].filter((it) => it !== hostname);
+          } else {
+            list = Array.from(new Set([...config['黑名单'], hostname]));
+          }
+          const newConfig = {
+            ...c,
+            ['黑名单']: list,
+          };
+          bluesea.setConfig(newConfig);
+
+          editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
+        }}
+      />
     </div>
 
     <div style="padding: 8px;margin-top: 32px;">
@@ -901,7 +935,7 @@ const Setting = () => {
             alert('重置成功');
           }, 200);
         }}
-        >重置</span
+        >重置为初始配置</span
       >
       <span
         style="color: #1890ff; margin-left: 8px; cursor: pointer"
@@ -920,7 +954,7 @@ const Setting = () => {
       >
     </div>
     <small style="color: #aaa; margin-left: 8px">
-      更新配置后如果没有生效，可以尝试刷新页面
+      更新配置后，需要刷新页面
     </small>
 
     <div ref=${ref}></div>

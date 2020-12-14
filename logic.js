@@ -59,9 +59,11 @@ const materialsDB = new Storage('materials');
 const configDB = new Storage('config');
 
 const defaultConfig = {
-  单词弹幕域名黑名单: [],
+  划词翻译: true,
+  单词高亮: true,
+  单词弹幕: true,
+  黑名单: [],
   单词弹幕数量上限: 10,
-  划词高亮域名黑名单: [],
   自动发音: true,
   中文注解: true,
   隐藏完成复习的单词: true,
@@ -157,14 +159,16 @@ class BlueSea {
   }
 
   async addMaterialObj(material) {
-    const l = await this.getMaterials()
+    const l = await this.getMaterials();
     const existMaterial = l.find((it) => it.text === material.text);
     if (existMaterial) {
-      existMaterial.textExts = Array.from(new Set([...(existMaterial.textExts || []), ...material.textExts]))
-      await this.setMaterials(l)
-      return 
+      existMaterial.textExts = Array.from(
+        new Set([...(existMaterial.textExts || []), ...material.textExts])
+      );
+      await this.setMaterials(l);
+      return;
     }
-    await this.setMaterials([...l, material])
+    await this.setMaterials([...l, material]);
   }
 
   async delMaterial(text) {
@@ -382,10 +386,11 @@ class FunCtrl {
   constructor() {
     configDB.watch(() => {
       this.fns.forEach(async (it) => {
-        const inBlack = await this.testBlack(it.fnKey);
-        //先清除，后执行
         it.clear();
-        if (!inBlack) {
+        const inBlack = await this.testBlack();
+        const config = await bluesea.getConfig();
+        const isActived = config[it.fnKey];
+        if (!inBlack && isActived) {
           it.start();
         } else {
           it.clear();
@@ -394,21 +399,22 @@ class FunCtrl {
     });
   }
   async run(fnKey, start, clear) {
-    // console.log('run')
-    const inBlack = await this.testBlack(fnKey);
-    if (!inBlack) {
-      // console.log('self')
-      start();
-    }
     this.fns.push({
       fnKey,
       start,
       clear,
     });
-  }
-  async testBlack(key) {
+    const inBlack = await this.testBlack();
     const config = await bluesea.getConfig();
-    const blackList = config[key];
+    const isActived = config[fnKey];
+
+    if (!inBlack && isActived) {
+      start();
+    }
+  }
+  async testBlack() {
+    const config = await bluesea.getConfig();
+    const blackList = config['黑名单'];
     const hostname = new URL(window.location).hostname;
     return blackList.some((it) => it === hostname);
   }

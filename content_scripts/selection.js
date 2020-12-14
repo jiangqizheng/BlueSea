@@ -29,7 +29,8 @@ const listenMouseup = (e) => {
         return;
       }
 
-      if (selectText.split(' ') > 30) {
+      // 出于节约资源考虑，默认限制翻译长句，如有需要自行修改
+      if (selectText.split(' ') > 10) {
         // console.log('太长不翻译');
         return;
       }
@@ -72,7 +73,7 @@ const listenMousedown = (e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   funCtrl.run(
-    '划词高亮域名黑名单',
+    '划词翻译',
     () => {
       document.addEventListener('mouseup', listenMouseup);
       document.addEventListener('mousedown', listenMousedown);
