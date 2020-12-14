@@ -3,8 +3,7 @@ BlueSea，是一个有趣的英语学习扩展程序。支持划词翻译、单�
 
 ## 安装使用
 
-> 测试中，可以直接 clone 项目，加载已解压的扩展程序来使用。待功能稳定后，上架 chrome
-
+> 当前为测试阶段，可以直接 clone 项目，加载已解压的扩展程序来使用。
 > 安装扩展后，建议刷新页面
 
 ## 功能清单
@@ -23,27 +22,27 @@ BlueSea，是一个有趣的英语学习扩展程序。支持划词翻译、单�
 
 ### 在页面上遇到生词，进行**划词翻译、发音**
 
-![划词翻译](https://images-1254074572.cos.ap-guangzhou.myqcloud.com/%E5%88%92%E8%AF%8D%E7%BF%BB%E8%AF%91.gif)
+![划词翻译](./images/划词翻译.gif)
 
 ### 将生词加入单词本，并根据遗忘曲线，生成复习计划。在复习期间内的单词，将在页面内被**高亮展示**，鼠标移入可以查看信息。
 
-![单词高亮](https://images-1254074572.cos.ap-guangzhou.myqcloud.com/%E5%8D%95%E8%AF%8D%E9%AB%98%E4%BA%AE.gif)
+![单词高亮](./images/单词高亮.gif)
 
 ### 单词到复习时间，自动创建**单词弹幕**在页面内出现，选择认识或不认识，动态调整复习计划。
 
-![单词弹幕](https://images-1254074572.cos.ap-guangzhou.myqcloud.com/%E5%8D%95%E8%AF%8D%E5%BC%B9%E5%B9%95.gif)
+![单词弹幕](./images/单词弹幕.gif)
 
 ### 单词卡片，查看单词具体信息
 
-![单词卡片](https://images-1254074572.cos.ap-guangzhou.myqcloud.com/%E5%8D%95%E8%AF%8D%E5%8D%A1%E7%89%87.gif)
+![单词卡片](./images/单词卡片.gif)
 
 ### 单词本，进行单词管理，或查看词频与其他信息
 
-![单词本](https://images-1254074572.cos.ap-guangzhou.myqcloud.com/%E5%8D%95%E8%AF%8D%E6%9C%AC.gif)
+![单词本](./images/单词本.gif)
 
 ### 配置中心，进行各类配置设定
 
-![配置](https://images-1254074572.cos.ap-guangzhou.myqcloud.com/%E9%85%8D%E7%BD%AE.gif)
+![配置](./images/配置.gif)
 
 
 ## 更多说明
@@ -67,6 +66,7 @@ BlueSea，是一个有趣的英语学习扩展程序。支持划词翻译、单�
 }
 ```
 > 后续会逐步增加可配置项（自定义遗忘曲线、高亮样式、弹幕速度...）
+
 
 ## 开发
 

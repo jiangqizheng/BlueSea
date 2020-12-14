@@ -11,7 +11,7 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
 
     useEffect(() => {
       const t =
-        Math.random() * (document.documentElement.clientHeight - 150) + 32;
+        Math.random() * (document.documentElement.clientHeight - 250) + 32;
       setTop(t);
     }, []);
 
