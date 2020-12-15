@@ -7,6 +7,34 @@
   </head>
   <body>
     <style>
+      .search-input {
+        width: 260px;
+        margin: 0 auto;
+        margin-top: 24px;
+        display: block;
+        font-size: 24px;
+        padding: 4px 6px;
+      }
+
+      .search-input::-webkit-input-placeholder {
+        color: #ccc;
+      }
+      .search-tip {
+        padding: 8px;
+        font-size: 12px;
+        color: #888;
+        border-bottom: 1px solid #f1f1f1;
+      }
+      .search-item {
+        display: block;
+        font-size: 24px;
+        padding: 4px 6px;
+      }
+      .search-item:hover {
+        background: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
       body,
       * {
         box-sizing: border-box;
@@ -110,6 +138,10 @@
     <script src="../lib/dayjs.js"></script>
     <script src="../lib/standalone.module.mini.js"></script>
     <script src="../logic.js"></script>
-    <script src="popup.js"></script>
+    <script src="common.js"></script>
+    <script src="page-search.js"></script>
+    <script src="page-material.js"></script>
+    <script src="page-setting.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
