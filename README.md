@@ -23,6 +23,7 @@ git clone https://github.com/jiangqizheng/BlueSea
 * 卡片式单词复习功能
 * 根据遗忘曲线，自动安排单词学习计划（卡片或弹幕）
 * 导入/导出
+* 单词查询
 
 ## 配置项
 
@@ -43,6 +44,8 @@ git clone https://github.com/jiangqizheng/BlueSea
 > 后续会逐步增加可配置项（自定义遗忘曲线、高亮样式、弹幕速度...）
 
 ## 交互演示
+
+> 仅供参考，迭代后实际界面可能已经发生改变。
 
 ### 在页面上遇到生词，进行**划词翻译、发音**
 

@@ -12,7 +12,8 @@ chrome.runtime.onMessage.addListener(
           sendResponse(material.youdao);
         } else {
           const res = await fetch(
-            `https://service-7dkwwbu2-1254074572.gz.apigw.tencentcs.com/release?text=${payload}`
+            // `https://service-7dkwwbu2-1254074572.gz.apigw.tencentcs.com/release?text=${payload}` // 已弃用，请勿使用
+            `https://service-pnrys8g3-1254074572.bj.apigw.tencentcs.com/release?text=${payload}`
           ).then((raw) => raw.json());
           if (res.success) {
             sendResponse(res.content);
