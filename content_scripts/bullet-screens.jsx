@@ -18,14 +18,15 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
 
     useEffect(() => {
       const listenEnter = () => {
-        audioRef?.current?.play()?.then(() => setNeedFirstClickHint(false))?.catch(e => {
-          if(e.message.startsWith(
-            "play() failed because the user didn't interact with the document first"
-            )){
-              setNeedFirstClickHint(true);
-            }
-        });
-
+        if(audioRef.current){
+          audioRef.current.play().then(() => setNeedFirstClickHint(false)).catch(e => {
+            if(e.message.startsWith(
+              "play() failed because the user didn't interact with the document first"
+              )){
+                setNeedFirstClickHint(true);
+              }
+          });
+        }
         setAnimationRunning(false);
       };
       const listenLeave = () => {
