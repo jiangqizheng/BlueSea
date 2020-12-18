@@ -22,7 +22,7 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
           audioRef.current.play().then(() => setNeedFirstClickHint(false)).catch(e => {
             if(e.message.startsWith(
               "play() failed because the user didn't interact with the document first"
-              )){
+              )) {
                 setNeedFirstClickHint(true);
               }
           });
