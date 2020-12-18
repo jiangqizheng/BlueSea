@@ -40,6 +40,11 @@ const listenMouseup = (e) => {
         return;
       }
 
+      if (!/.*[a-zA-Z]{3,}.*/.test(selectText)) {
+        // console.log('所选内容必须存在连续3个及以上字母时，才展开翻译');
+        return;
+      }
+
       // 开始和边界不在黑名单标签内
       if (inBlackEl(range.startContainer) || inBlackEl(range.endContainer)) {
         // console.log('选中的内容存在特殊标签内，不展开');
@@ -50,8 +55,8 @@ const listenMouseup = (e) => {
       selectedAxTip.render(rangeRect, {
         text: selectText,
         onMark: async (youdao) => {
-          const material = bluesea.createMaterialObj(youdao.query, youdao)
-          await bluesea.addMaterialObj(material)
+          const material = bluesea.createMaterialObj(youdao.query, youdao);
+          await bluesea.addMaterialObj(material);
           selectedAxTip.clear();
         },
       });
@@ -67,7 +72,7 @@ const listenMousedown = (e) => {
   if (selection.rangeCount > 0) {
     lastText = selection.toString().trim();
   }
-  axTip.clear()
+  axTip.clear();
   selectedAxTip.clear();
 };
 
