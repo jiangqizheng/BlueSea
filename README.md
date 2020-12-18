@@ -3,7 +3,7 @@ BlueSea，是一个有趣的英语学习扩展程序。支持划词翻译、单�
 
 ## 安装使用&开发调试
 
-下载代码到本地
+`下载代码到本地`
 
 ```bash
 git clone https://github.com/jiangqizheng/BlueSea
@@ -12,6 +12,10 @@ git clone https://github.com/jiangqizheng/BlueSea
 在 chrome 地址栏输入 `chrome://extensions/` 进入到扩展程序管理界面，然后点击 `加载已解压的扩展程序` 选择刚刚下载到本地的 BlueSea 目录即可。
 
 > 当前为测试阶段，请加载已解压的扩展程序来使用。安装扩展后，建议刷新页面。
+
+`更新测试版本`
+
+直接使用 `git pull` 进行更新即可。
 
 ## 功能清单
 
@@ -42,6 +46,11 @@ git clone https://github.com/jiangqizheng/BlueSea
 }
 ```
 > 后续会逐步增加可配置项（自定义遗忘曲线、高亮样式、弹幕速度...）
+
+
+## 更新日志
+
+[CHANGELOG.md](./CHANGELOG.md)
 
 ## 交互演示
 

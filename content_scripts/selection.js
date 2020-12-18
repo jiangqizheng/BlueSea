@@ -29,12 +29,6 @@ const listenMouseup = (e) => {
         return;
       }
 
-      // 出于节约资源考虑，默认限制翻译长句，如有需要自行修改
-      if (selectText.split(' ') > 10) {
-        // console.log('太长不翻译');
-        return;
-      }
-
       if (selectText === '' || !/^[^\u4e00-\u9fa5]+$/.test(selectText)) {
         // console.log('空或者是中文，不进行展开');
         return;
@@ -51,6 +45,12 @@ const listenMouseup = (e) => {
         return;
       }
       const rangeRect = range.getBoundingClientRect();
+
+      // 出于节约资源考虑，默认限制翻译长句，如有需要自行修改
+      // if (selectText.split(' ').length > 1) {
+      //   console.log('句子');
+      //   // return;
+      // }
 
       selectedAxTip.render(rangeRect, {
         text: selectText,

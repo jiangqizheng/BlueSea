@@ -80,17 +80,70 @@ const forPhonetic = (text) => {
 
 function makeTipEl(root, options, isBottom) {
   const App = () => {
-    const [tfData, setTfData] = useState(null);
+    // 仅单词时发音
+    const isOneWord = options.text.split(' ').length === 1;
+
     const audioRef = useRef();
+    const [tfData, setTfData] = useState(null);
+    const [ableTranslation, setAbleTranslation] = useState(isOneWord);
 
     useEffect(() => {
-      //发起翻译
-      chrome.runtime.sendMessage({ type: 'tf', payload: options.text }, (r) => {
-        setTfData(r);
-      });
-    }, []);
+      if (ableTranslation) {
+        chrome.runtime.sendMessage(
+          { type: 'tf', payload: options.text },
+          (r) => {
+            setTfData(r);
+          }
+        );
+      }
+    }, [ableTranslation]);
 
     const config = bluesea.useConfig();
+
+    if (!ableTranslation) {
+      return html`<div
+        style="
+      position: relative;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #222;
+      box-sizing: border-box;
+      min-height: 130px;
+    "
+      >
+        <div
+          style="position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0px;
+        width: 36px;
+        height: 24px;
+        line-height: 24px;
+        background: #f5f5d5;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 2px;
+        border: 1px solid #444;"
+          onClick=${() => {
+            setAbleTranslation(true);
+          }}
+        >
+          译
+        </div>
+        <div
+          style="position: absolute;
+        z-index: -1;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        bottom: ${isBottom && '-4px'};
+        top: ${!isBottom && '-4px'};
+        width: 20px;
+        height: 20px;
+        background: #f5f5d5;
+        border: 1px solid #444;"
+        ></div>
+      </div>`;
+    }
 
     if (!tfData || !config) {
       return html`<div
@@ -106,14 +159,22 @@ function makeTipEl(root, options, isBottom) {
       "
       >
         <d-loading />
+        <div
+          style="position: absolute;
+          z-index: -1;
+          left: 50%;
+          transform: translateX(-50%) rotate(45deg);
+          bottom: ${isBottom && '-4px'};
+          top: ${!isBottom && '-4px'};
+          width: 20px;
+          height: 20px;
+          background: #f5f5d5;
+          border: 1px solid #444;"
+        ></div>
       </div>`;
     }
 
-    // 仅单词时发音
-    const isOneWord = options.text.split(' ').length === 1;
-
     return html`<div class="bluesea-tip notranslate" translate="no">
-      <!-- 大于30不发音 -->
       ${isOneWord
         ? config['自动发音']
           ? html`<audio
@@ -129,33 +190,35 @@ function makeTipEl(root, options, isBottom) {
         : ''}
       <!-- <d-loading /> -->
       <div style="flex: 1;padding: 8px;">
-        <div class="bluesea-tip-row">
-          <div style="font-size: 18px;font-weight: bold;">
-            ${tfData.returnPhrase ? tfData.returnPhrase[0] : tfData.query}
-          </div>
-          <svg
-            style="margin-left: 4px;margin-bottom: -3px;cursor: pointer;"
-            t="1606215479613"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="1940"
-            width="16"
-            height="16"
-            onClick=${() => {
-              if (audioRef.current) {
-                audioRef.current.play();
-              }
-            }}
-          >
-            <path
-              d="M552.96 152.064v719.872c0 16.11776-12.6976 29.184-28.3648 29.184a67.4816 67.4816 0 0 1-48.39424-20.64384l-146.8416-151.12192A74.5472 74.5472 0 0 0 275.8656 706.56h-25.3952C146.08384 706.56 61.44 619.45856 61.44 512s84.64384-194.56 189.0304-194.56h25.3952c20.0704 0 39.30112-8.192 53.47328-22.79424l146.8416-151.1424A67.4816 67.4816 0 0 1 524.61568 122.88C540.2624 122.88 552.96 135.94624 552.96 152.064z m216.96512 101.5808a39.936 39.936 0 0 1 0-57.42592 42.25024 42.25024 0 0 1 58.7776 0c178.4832 174.40768 178.4832 457.15456 0 631.56224a42.25024 42.25024 0 0 1-58.7776 0 39.936 39.936 0 0 1 0-57.40544 359.50592 359.50592 0 0 0 0-516.75136z m-103.38304 120.23808a39.7312 39.7312 0 0 1 0-55.23456 37.51936 37.51936 0 0 1 53.94432 0c104.30464 106.78272 104.30464 279.92064 0 386.70336a37.51936 37.51936 0 0 1-53.94432 0 39.7312 39.7312 0 0 1 0-55.23456c74.48576-76.288 74.48576-199.94624 0-276.23424z"
-              p-id="1941"
-              fill="#666"
-            ></path>
-          </svg>
-        </div>
+        ${isOneWord
+          ? html`<div class="bluesea-tip-row">
+              <div style="font-size: 18px;font-weight: bold;">
+                ${tfData.returnPhrase ? tfData.returnPhrase[0] : tfData.query}
+              </div>
+              <svg
+                style="margin-left: 4px;margin-bottom: -3px;cursor: pointer;"
+                t="1606215479613"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="1940"
+                width="16"
+                height="16"
+                onClick=${() => {
+                  if (audioRef.current) {
+                    audioRef.current.play();
+                  }
+                }}
+              >
+                <path
+                  d="M552.96 152.064v719.872c0 16.11776-12.6976 29.184-28.3648 29.184a67.4816 67.4816 0 0 1-48.39424-20.64384l-146.8416-151.12192A74.5472 74.5472 0 0 0 275.8656 706.56h-25.3952C146.08384 706.56 61.44 619.45856 61.44 512s84.64384-194.56 189.0304-194.56h25.3952c20.0704 0 39.30112-8.192 53.47328-22.79424l146.8416-151.1424A67.4816 67.4816 0 0 1 524.61568 122.88C540.2624 122.88 552.96 135.94624 552.96 152.064z m216.96512 101.5808a39.936 39.936 0 0 1 0-57.42592 42.25024 42.25024 0 0 1 58.7776 0c178.4832 174.40768 178.4832 457.15456 0 631.56224a42.25024 42.25024 0 0 1-58.7776 0 39.936 39.936 0 0 1 0-57.40544 359.50592 359.50592 0 0 0 0-516.75136z m-103.38304 120.23808a39.7312 39.7312 0 0 1 0-55.23456 37.51936 37.51936 0 0 1 53.94432 0c104.30464 106.78272 104.30464 279.92064 0 386.70336a37.51936 37.51936 0 0 1-53.94432 0 39.7312 39.7312 0 0 1 0-55.23456c74.48576-76.288 74.48576-199.94624 0-276.23424z"
+                  p-id="1941"
+                  fill="#666"
+                ></path>
+              </svg>
+            </div>`
+          : ''}
 
         <div class="flex: 1">
           <!-- 英标 -->
@@ -218,9 +281,15 @@ function makeTipEl(root, options, isBottom) {
                   "
               ></div>
               <div
+                style=${{
+                  color: !isOneWord && '#888',
+                  cursor: !isOneWord && 'not-allowed',
+                }}
                 class="bluesea-tip-btn"
                 onclick=${() => {
-                  options.onMark(tfData);
+                  if (isOneWord) {
+                    options.onMark(tfData);
+                  }
                 }}
               >
                 收藏
@@ -302,6 +371,7 @@ class AxTip {
     tipRoot.style.userSelect = 'none';
 
     makeTipEl(tipRoot, props, rect.top >= 150);
+
     setPos(tipRoot, rect);
 
     return tipRoot;
