@@ -18,7 +18,7 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
 
     useEffect(() => {
       const listenEnter = () => {
-        audioRef?.current?.play()?.then(() => setNeedFirstClickHint(false)).catch(e => {
+        audioRef?.current?.play()?.then(() => setNeedFirstClickHint(false))?.catch(e => {
           if(e.message.startsWith(
             "play() failed because the user didn't interact with the document first"
             )){
@@ -59,7 +59,7 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
           listenAnimationiteration
         );
       };
-    }, [operated, ytlBulletRef, setNeedFirstClickHint]);
+    }, [operated, ytlBulletRef]);
 
     // let color = `#${Math.floor(Math.random() * (2 << 23)).toString(16)}`;
     return html`<div
