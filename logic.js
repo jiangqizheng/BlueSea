@@ -154,6 +154,7 @@ class BlueSea {
       learn: this.createLearnObj(),
       // 保留完整数据，后面可能会使用
       youdao,
+      addFrom: location.href,
     };
     return material;
   }
