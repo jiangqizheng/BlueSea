@@ -3,7 +3,7 @@ BlueSea，是一个有趣的英语学习扩展程序。支持划词翻译、单�
 
 ## 安装使用&开发调试
 
-`下载代码到本地`
+下载代码到本地
 
 ```bash
 git clone https://github.com/jiangqizheng/BlueSea
@@ -13,9 +13,9 @@ git clone https://github.com/jiangqizheng/BlueSea
 
 > 当前为测试阶段，请加载已解压的扩展程序来使用。安装扩展后，建议刷新页面。
 
-`更新测试版本`
+更新测试版本
 
-直接使用 `git pull` 进行更新即可。
+直接使用 `git pull` 进行更新，更新后重启 chrome 或刷新页面即可。
 
 ## 功能清单
 

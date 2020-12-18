@@ -13,6 +13,8 @@ const inBlackEl = (el) => {
 
 let lastText = '';
 
+
+
 const listenMouseup = (e) => {
   if (isYTL(e.target)) {
     return;
@@ -22,15 +24,20 @@ const listenMouseup = (e) => {
   if (selection.rangeCount > 0) {
     const range = selection.getRangeAt(0);
     if (!range.collapsed) {
-      const selectText = selection.toString().trim();
+      let selectText = selection.toString().trim();
+
 
       if (lastText === selectText) {
         lastText = '';
         return;
       }
 
-      if (selectText === '' || !/^[^\u4e00-\u9fa5]+$/.test(selectText)) {
-        // console.log('空或者是中文，不进行展开');
+      if (selectText === '') {
+        return;
+      }
+
+      // 不翻译中文
+      if (!/^[^\u4e00-\u9fa5]+$/.test(selectText)) {
         return;
       }
 
@@ -39,19 +46,30 @@ const listenMouseup = (e) => {
         return;
       }
 
+      const selectTextArr = selectText.split(' ');
+
+      if (selectTextArr.length === 1) {
+        // 非句子情况下，仅匹配纯粹单词，如果匹配到特殊符号就跳过，这里是为了避免干扰复制各类命令或url
+        // 是否需要兼容，可能存在左右端误选了标点符号的情况呢？
+        const symbolReg = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im;
+        if (symbolReg.test(selectText)) {
+          return;
+        }
+      }
+
+      // 过滤类似日志文件之类的奇怪玩意。
+      // 最长的单词45个字母，Pneumonoultramicroscopicsilicovolcanoconiosis
+      if (selectTextArr.some((it) => it.length > 45)) {
+        return;
+      }
+
       // 开始和边界不在黑名单标签内
       if (inBlackEl(range.startContainer) || inBlackEl(range.endContainer)) {
         // console.log('选中的内容存在特殊标签内，不展开');
         return;
       }
-      const rangeRect = range.getBoundingClientRect();
 
-      // 过滤类似日志文件之类的奇怪玩意。
-      // 最长的单词45个字母，Pneumonoultramicroscopicsilicovolcanoconiosis
-      if (selectText.split(' ').some(it => it.length > 45)) {
-        // console.log('过滤奇怪的东西');
-        return;
-      }
+      const rangeRect = range.getBoundingClientRect();
 
       selectedAxTip.render(rangeRect, {
         text: selectText,
