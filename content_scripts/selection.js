@@ -46,11 +46,12 @@ const listenMouseup = (e) => {
       }
       const rangeRect = range.getBoundingClientRect();
 
-      // 出于节约资源考虑，默认限制翻译长句，如有需要自行修改
-      // if (selectText.split(' ').length > 1) {
-      //   console.log('句子');
-      //   // return;
-      // }
+      // 过滤类似日志文件之类的奇怪玩意。
+      // 最长的单词45个字母，Pneumonoultramicroscopicsilicovolcanoconiosis
+      if (selectText.split(' ').some(it => it.length > 45)) {
+        // console.log('过滤奇怪的东西');
+        return;
+      }
 
       selectedAxTip.render(rangeRect, {
         text: selectText,
