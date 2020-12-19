@@ -13,8 +13,7 @@ chrome.runtime.onMessage.addListener(
         } else {
           const config = await bluesea.getConfig()
           const res = await fetch(
-            // `https://service-pnrys8g3-1254074572.bj.apigw.tencentcs.com/release?text=${payload}`
-            `https://service-mpq3ahbf-1254074572.bj.apigw.tencentcs.com/release?text=${payload}&appkey=${config['有道智云appkey'] || ''}&key=${config['有道智云key'] || ''}`
+            `https://service-pnrys8g3-1254074572.bj.apigw.tencentcs.com/release?text=${payload}&appkey=${config['有道智云appkey'] || ''}&key=${config['有道智云key'] || ''}`
           ).then((raw) => raw.json());
           if (res.success) {
             sendResponse(res.content);
