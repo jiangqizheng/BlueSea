@@ -117,7 +117,9 @@ const SuperCard = ({ material, needLearn }) => {
               <div style="margin-bottom: 4px;">
                 <div>添加自：</div>
                 <div>
-                  <a href="${material.addFrom}">${material.addFrom ? "点击此可跳转" : "未知来源"}</a>
+                  <a href="${material.addFrom}" target="_blank" onClick=${(e) => {
+                    e.stopPropagation()
+                  }}>${material.addFrom ? "点击此可跳转" : "未知来源"}</a>
                 </div>
               </div>
 

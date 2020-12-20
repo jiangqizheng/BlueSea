@@ -53,16 +53,18 @@ git clone https://github.com/jiangqizheng/BlueSea
 
 直接使用 `git pull` 进行更新，更新后重启 chrome 或刷新页面即可。
 
-如果使用 `git pull` 出现文件合并冲突
+<details>
 
-`error: Your local changes to the following files would be overwritten by merge:`
+<summary><b>如出现文件合并冲突提示: `error: Your local changes to the following files would be overwritten by merge`</b></summary>
 
-请使用如下操作更新
+可以使用
 
+```bash
 `git add -A`
 `git commit -m "update"`
 `git pull`
-
+```
+</details>
 
 ## 配置项
 

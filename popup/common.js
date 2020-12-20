@@ -22,7 +22,8 @@ const TfCard = ({ tfData }) => {
           p-id="1940"
           width="16"
           height="16"
-          onClick=${() => {
+          onClick=${(e) => {
+             e.stopPropagation()
             var audioBlock = document.createElement('audio');
             audioBlock.setAttribute(
               'src',
