@@ -59,9 +59,9 @@ git clone https://github.com/jiangqizheng/BlueSea
 
 请使用如下操作更新
 
-`git stash`
+`git add -A`
+`git commit -m "update"`
 `git pull`
-`git stash pop`
 
 
 ## 配置项
