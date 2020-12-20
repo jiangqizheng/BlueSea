@@ -97,6 +97,11 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
           border-radius: 16px;
           color: #fff;"
         ref=${ytlBulletContentRef}
+        onmouseup=${e => {
+          if(e.button === 1 && material.addFrom) {
+            window.open(material.addFrom, '_blank');
+          }
+        }}
       >
         <span style="color: #fff">${material.text}</span>
         <span
