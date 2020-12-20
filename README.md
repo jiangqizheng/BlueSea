@@ -53,13 +53,23 @@ git clone https://github.com/jiangqizheng/BlueSea
 
 直接使用 `git pull` 进行更新，更新后重启 chrome 或刷新页面即可。
 
+如果使用 `git pull` 出现文件合并冲突
+
+`error: Your local changes to the following files would be overwritten by merge:`
+
+请使用如下操作更新
+
+`git stash`
+`git pull`
+`git stash pop`
+
 
 ## 配置项
 
 ```js
 {
 	"划词翻译": true, //基础配置（优先级最高），是否启动划词翻译
-  "单词高亮": true, //基础配置
+  	"单词高亮": true, //基础配置
 	"单词弹幕": true, //基础配置
 	"黑名单": [],
 	"中文注解": true,//全局高亮的时候，是否在单词右上角直接显示中文翻译
@@ -67,8 +77,8 @@ git clone https://github.com/jiangqizheng/BlueSea
 	"单词弹幕数量上限": 10,//一屏内单词弹幕数量，据电脑性能量力而行
 	"单词弹幕速度": 10, // 单位秒，默认为弹幕走完一个周期需要10秒
 	"隐藏完成复习的单词": true//出于性能考虑，建议保持隐藏
-  "有道智云appkey": "", //参考下面说明，配置后支持句子翻译
-  "有道智云key": "", //参考下面说明，配置后支持句子翻译
+ 	"有道智云appkey": "", //参考下面说明，配置后支持句子翻译
+  	"有道智云key": "", //参考下面说明，配置后支持句子翻译
 }
 ```
 > 后续会逐步增加可配置项（自定义遗忘曲线、高亮样式、弹幕速度...）
