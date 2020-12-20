@@ -6,7 +6,6 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
     const [top, setTop] = useState(0);
     const [operated, setOperated] = useState(null);
     const [animationRunning, setAnimationRunning] = useState(true);
-    const [needFirstClickHint, setNeedFirstClickHint] = useState(false);
 
     const audioRef = useRef();
 
@@ -19,13 +18,9 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
     useEffect(() => {
       const listenEnter = () => {
         if(audioRef.current){
-          audioRef.current.play().then(() => setNeedFirstClickHint(false)).catch(e => {
-            if(e.message.startsWith(
-              "play() failed because the user didn't interact with the document first"
-              )) {
-                setNeedFirstClickHint(true);
-              }
-          });
+          audioRef.current.play().catch(e => {
+            console.error(e)
+          })
         }
         setAnimationRunning(false);
       };
@@ -113,14 +108,6 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
           >${material.translation}</span
         >
       </div>
-      <p style="
-        display: ${needFirstClickHint ? "" : "none"};
-        mix-blend-mode: difference;        
-      ">
-          囿于
-          <a href="https://goo.gl/xX8pDD" target="_blank">浏览器策略</a>
-          之限制，您需要首先在页面上点击任意元素，接下来方可自动播放音频
-      </p>
 
       <div
         style=${{
