@@ -165,6 +165,9 @@ function makeBulletApp(root, { material, onOperate, destroy, autoAudio, bulletSp
           padding: 8px;
           animation: bluesea-bullet-animation ${bulletSpeed}s infinite linear 0s;
         }
+        .bluesea-bullet, .bluesea-bullet > * {
+          font-size: 14px;
+        }
 
         @keyframes bluesea-bullet-animation {
           from {
