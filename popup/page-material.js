@@ -502,10 +502,11 @@ const Material = () => {
                           return keys.every((it) => it in cur);
                         }, true);
 
-                        if (!isFull) {
-                          alert('格式校验未通过，数据异常或不完整');
-                          return;
-                        }
+                        // @TODO 有些导入的数据没有statistics字段
+                        // if (!isFull) {
+                        //   alert('格式校验未通过，数据异常或不完整');
+                        //   return;
+                        // }
 
                         l = l.filter((it) => {
                           return !list.some((it2) => it.text === it2.text);

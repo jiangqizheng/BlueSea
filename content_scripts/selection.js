@@ -51,10 +51,15 @@ const listenMouseup = (e) => {
       if (selectTextArr.length === 1) {
         // 非句子情况下，仅匹配纯粹单词，如果匹配到特殊符号就跳过，这里是为了避免干扰复制各类命令或url
         // 是否需要兼容，可能存在左右端误选了标点符号的情况呢？
-        const symbolReg = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/im;
+        const symbolReg = /[`~!@#$%^&*()_+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——+={}|《》？：“”【】、；‘'，。、]/im;
         if (symbolReg.test(selectText)) {
           return;
         }
+      }
+
+      //替换/t为空格，因为显示word1\tword2查询为word1word2了,预期是查询word1 word2
+      if (/\t/g.test(selectText)){
+        selectText = selectText.replace(/\t/, ' ')
       }
 
       // 过滤类似日志文件之类的奇怪玩意。

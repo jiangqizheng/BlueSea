@@ -80,12 +80,15 @@ const forPhonetic = (text) => {
 
 function makeTipEl(root, options, isBottom) {
   const App = () => {
-    // 仅单词时发音
-    const isOneWord = options.text.split(' ').length === 1;
+    // 少于4个单词时发音(兼顾单词、短语)
+    const words = options.text.split(' ').length;
+    const isOneWord = words === 1;
+    const isPhrase = words > 1 && words <=4; //暂且认为可能的小句也是短语
+    const isSentence = words > 4;
 
     const audioRef = useRef();
     const [tfData, setTfData] = useState(null);
-    const [ableTranslation, setAbleTranslation] = useState(isOneWord);
+    const [ableTranslation, setAbleTranslation] = useState(isOneWord || isPhrase);
 
     useEffect(() => {
       if (ableTranslation) {
@@ -175,7 +178,7 @@ function makeTipEl(root, options, isBottom) {
     }
 
     return html`<div class="bluesea-tip notranslate" translate="no">
-      ${isOneWord
+      ${!isSentence
         ? config['自动发音']
           ? html`<audio
               src="https://dict.youdao.com/dictvoice?audio=${tfData.query}"
@@ -190,7 +193,7 @@ function makeTipEl(root, options, isBottom) {
         : ''}
       <!-- <d-loading /> -->
       <div style="flex: 1;padding: 8px;">
-        ${isOneWord
+        ${!isSentence
           ? html`<div class="bluesea-tip-row">
               <div style="font-size: 18px;font-weight: bold;">
                 ${tfData.returnPhrase ? tfData.returnPhrase[0] : tfData.query}
@@ -282,12 +285,12 @@ function makeTipEl(root, options, isBottom) {
               ></div>
               <div
                 style=${{
-                  color: !isOneWord && '#888',
-                  cursor: !isOneWord && 'not-allowed',
+                  color: isSentence && '#888',
+                  cursor: isSentence && 'not-allowed',
                 }}
                 class="bluesea-tip-btn"
                 onclick=${() => {
-                  if (isOneWord) {
+                  if (!isSentence) {
                     options.onMark(tfData);
                   }
                 }}
