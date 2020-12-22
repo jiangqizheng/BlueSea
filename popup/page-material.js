@@ -490,7 +490,6 @@ const Material = () => {
                         const keys = [
                           'ctime',
                           'learn',
-                          'statistics',
                           'text',
                           'translation',
                           'youdao',
