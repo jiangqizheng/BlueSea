@@ -115,7 +115,7 @@ function makeTipEl(root, options, isBottom) {
           style="position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 0px;
+        bottom: ${isBottom ? '0' : 'initial'};
         width: 36px;
         height: 24px;
         line-height: 24px;
