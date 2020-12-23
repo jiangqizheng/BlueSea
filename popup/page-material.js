@@ -131,7 +131,7 @@ const SuperCard = ({ material, needLearn }) => {
   `;
 };
 
-const ModalLearnCard = ({ visible, onClose, material }) => {
+const ModalLearnCard = ({ visible, onClose, material, allowLearnOperation }) => {
   if (!visible) {
     return '';
   }
@@ -174,7 +174,7 @@ const ModalLearnCard = ({ visible, onClose, material }) => {
       >
         <${SuperCard} material=${material} needLearn=${needLearn} />
 
-        ${needLearn
+        ${(needLearn && allowLearnOperation)
           ? html` <div
               style="
                 display: flex;
@@ -401,6 +401,7 @@ const Material = () => {
   return html`
     <div style="height: 400px; overflow-y: auto; box-sizing: border-box;">
       <${ModalLearnCard}
+        allowLearnOperation=${!config['单词弹幕']}
         visible=${!!selectedMaterial}
         material=${selectedMaterial}
         onClose=${() => {
