@@ -219,7 +219,7 @@ class ButtelScreens {
   async makeBullet(material) {
     const buttelRoot = document.createElement('div');
     buttelRoot.classList.add('bluesea', 'bluesea-bullet-screens');
-    buttelRoot.style.userSelect = 'none';
+    // buttelRoot.style.userSelect = 'none';
     document.body.appendChild(buttelRoot);
     makeBulletApp(buttelRoot, {
       bulletSpeed: this.config['单词弹幕速度'] || 10, //可能存在未更新配置的用户，后续将删除默认值
