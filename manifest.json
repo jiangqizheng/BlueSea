@@ -6,7 +6,6 @@
   "homepage_url": "https://github.com/jiangqizheng/BlueSea",
   "permissions": [
     "storage",
-    "activeTab",
     "unlimitedStorage",
     "tabs"
   ],
