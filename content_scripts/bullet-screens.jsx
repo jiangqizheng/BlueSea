@@ -32,8 +32,8 @@ function makeBulletApp(
       };
 
       const listenAnimationiteration = async () => {
-        // 校验当前单词是否还在复习清单内（可能在其他地方被操作）
-        await buttelScreens.updateButteList()
+        // 每次动画结束后，就校验当前单词是否还在复习清单内（可能在其他地方被操作）
+        await buttelScreens.updateButteList();
         const exist = buttelScreens.buttelList.some(
           (it) => it.text === material.text
         );
@@ -119,6 +119,33 @@ function makeBulletApp(
           }}
           >${material.translation}</span
         >
+      </div>
+
+      <div
+        style=${{
+          alignItems: 'center',
+          padding: '4px 2px;',
+          marginTop: 4,
+          display: animationRunning ? 'none' : operated ? 'flex' : 'none',
+        }}
+      >
+        <div
+          style="
+            flex: 1;
+            text-align: center;
+            color: #fff;
+            border-radius: 4px;
+            padding: 4px;
+            cursor: pointer;
+            user-select: none;
+            background: #0070f3;"
+          onClick=${() => {
+            setOperated(null);
+            onOperate('revoke');
+          }}
+        >
+          记错了，重来
+        </div>
       </div>
 
       <div
@@ -251,7 +278,13 @@ class ButtelScreens {
       bulletSpeed: this.config['单词弹幕速度'] || 10, //可能存在未更新配置的用户，后续将删除默认值
       autoAudio: this.config['自动发音'],
       material,
-      onOperate: (flag) => {
+      onOperate: async (flag) => {
+        if (flag === 'revoke') {
+          await bluesea.updateMaterialObj(material)
+          this.addButtel(material)
+          return 
+        }
+
         if (flag) {
           bluesea.toLearnNext(material.text);
         } else {
@@ -275,7 +308,6 @@ class ButtelScreens {
       return;
     }
     this.focusFn = () => {
-
       if (this.timer) {
         return;
       }

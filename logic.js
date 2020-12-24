@@ -134,6 +134,8 @@ class BlueSea {
       return l;
     }
   }
+
+
   async setMaterials(l) {
     return materialsDB.set(l);
   }
@@ -159,6 +161,13 @@ class BlueSea {
       addFrom: location.href,
     };
     return material;
+  }
+
+  async updateMaterialObj(material) {
+    const l = await this.getMaterials();
+    const i = l.findIndex(it => it.text === material.text)
+    l.splice(i, 1, material)
+    await this.setMaterials(l);
   }
 
   async addMaterialObj(material) {
