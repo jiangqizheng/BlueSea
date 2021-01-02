@@ -256,6 +256,18 @@ function makeTipEl(root, options, isBottom) {
         ? html`<div class="bluesea-tip-row">
             <div style="flex:1"></div>
             <div class="bluesea-tip-btn-wrap">
+            <!-- <div
+                class="bluesea-tip-btn"
+              >
+                分析
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 16px;
+                  background: #666;
+                  "
+              ></div> -->
               <div
                 class="bluesea-tip-btn"
                 style="color: #888; cursor: not-allowed; "
@@ -267,6 +279,18 @@ function makeTipEl(root, options, isBottom) {
         : html`<div class="bluesea-tip-row">
             <div style="flex:1"></div>
             <div class="bluesea-tip-btn-wrap">
+            <!-- <div
+                class="bluesea-tip-btn"
+              >
+                分析
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 16px;
+                  background: #666;
+                  "
+              ></div> -->
               <div
                 class="bluesea-tip-btn"
                 style="color: #888; cursor: not-allowed; "

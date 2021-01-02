@@ -19,7 +19,6 @@ const Btns = ({ value, onChange }) => {
       }}
     >
       <div
-        className="btn_hover"
         style=${{
           flex: 1,
           padding: '2px 4px',
@@ -36,7 +35,6 @@ const Btns = ({ value, onChange }) => {
       </div>
       <div style=${{ padding: 2 }}></div>
       <div
-        className="btn_hover"
         style=${{
           flex: 1,
           padding: '2px 4px',
@@ -85,11 +83,10 @@ const Setting = () => {
     })();
   }, [config]);
 
-
-  config = config || {}
+  config = config || {};
 
   return html`<div
-    style="padding-bottom: 16px;height: 400px;overflow-y: auto; box-sizing: border-box;"
+    style="height: 100%;overflow-y: auto; box-sizing: border-box; padding: 18px;"
   >
     <style>
       .CodeMirror {
@@ -99,73 +96,86 @@ const Setting = () => {
       }
     </style>
 
-    <div style="padding: 8px;">
-      <span>基础功能启用</span>
-      <span style="margin-left: 8px;color: #888">
-        (快捷操作)
-      </span>
-    </div>
     <div
-      style="display: flex;align-items: center; background: #fff; padding: 4px 8px; border-bottom: 1px solid #f1f1f1"
+      style="height: 66px; background: #fff;display: flex;align-items: center;border-radius: 6px;"
     >
-      <div style="flex: 1">划词翻译</div>
-      <${Btns}
-        value=${config['划词翻译']}
-        onChange=${async (flag) => {
-          const c = await bluesea.getConfig();
-          const newConfig = {
-            ...c,
-            ['划词翻译']: flag,
-          };
-          bluesea.setConfig(newConfig);
-          editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
-        }}
+      <img
+        src="./imgs/icon-member-ordinary.png"
+        style="width: 42px; height: 42px;margin-left: 12px;"
       />
-    </div>
-    <div
-      style="display: flex;align-items: center; background: #fff; padding:4px 8px; border-bottom: 1px solid #f1f1f1"
-    >
-      <div style="flex: 1">单词高亮</div>
-      <${Btns}
-        value=${config['单词高亮']}
-        onChange=${async (flag) => {
-          const c = await bluesea.getConfig();
-          const newConfig = {
-            ...c,
-            ['单词高亮']: flag,
-          };
-          bluesea.setConfig(newConfig);
-          editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
-        }}
-      />
-    </div>
-    <div
-      style="display: flex; align-items: center; background: #fff; padding: 4px 8px; "
-    >
-      <div style="flex: 1">单词弹幕</div>
-      <${Btns}
-        value=${config['单词弹幕']}
-        onChange=${async (flag) => {
-          const c = await bluesea.getConfig();
-          const newConfig = {
-            ...c,
-            ['单词弹幕']: flag,
-          };
-          bluesea.setConfig(newConfig);
-          editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
-        }}
-      />
-    </div>
 
-    <div style="padding: 8px;">
-      <span>是否在当前域名启用</span>
-      <span style="margin-left: 8px;color: #888">
-        (黑名单快捷操作)
-      </span>
+      <div style=" margin-left: 16px;">
+        <div>访客</div>
+        <div style="color: #999; margin-top: 4px">未登录</div>
+      </div>
     </div>
 
     <div
-      style="display: flex; align-items: center; background: #fff; padding: 4px 8px; "
+      style="background: #191D26; color: #fff; height: 48px; line-height: 48px; padding-left: 18px; border-radius: 6px; margin-top: 18px;"
+    >
+      后续将逐步开放更多功能，尽情期待：）
+    </div>
+
+    <div style="margin-top: 18px; color: #999">基础功能启用（快捷操作）</div>
+
+    <div style="margin-top: 12px;">
+      <div
+        style="display: flex;align-items: center; background: #fff; height: 42px; line-height: 42px; padding: 0 12px;"
+      >
+        <div style="flex: 1; color: #333">划词翻译</div>
+        <${Btns}
+          value=${config['划词翻译']}
+          onChange=${async (flag) => {
+            const c = await bluesea.getConfig();
+            const newConfig = {
+              ...c,
+              ['划词翻译']: flag,
+            };
+            bluesea.setConfig(newConfig);
+            editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
+          }}
+        />
+      </div>
+      <div
+        style="display: flex;align-items: center; background: #fff; height: 42px; line-height: 42px;  padding: 0 12px;"
+      >
+        <div style="flex: 1; color: #333">单词高亮</div>
+        <${Btns}
+          value=${config['单词高亮']}
+          onChange=${async (flag) => {
+            const c = await bluesea.getConfig();
+            const newConfig = {
+              ...c,
+              ['单词高亮']: flag,
+            };
+            bluesea.setConfig(newConfig);
+            editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
+          }}
+        />
+      </div>
+      <div
+        style="display: flex; align-items: center; background: #fff; padding: 4px 8px; height: 42px; line-height: 42px;  padding: 0 12px; "
+      >
+        <div style="flex: 1; color: #333">单词弹幕</div>
+        <${Btns}
+          value=${config['单词弹幕']}
+          onChange=${async (flag) => {
+            const c = await bluesea.getConfig();
+            const newConfig = {
+              ...c,
+              ['单词弹幕']: flag,
+            };
+            bluesea.setConfig(newConfig);
+            editor.current.setValue(JSON.stringify(newConfig, null, '\t'));
+          }}
+        />
+      </div>
+    </div>
+
+    <div style="margin-top: 18px; color: #999">是否在当前域名启用(黑名单快捷操作) </div>
+
+    <div
+      style="display: flex; align-items: center; background: #fff; height: 42px; line-height: 42px; margin-top: 12px;"
     >
       <div style="flex: 1">${hostname}</div>
       <${Btns}

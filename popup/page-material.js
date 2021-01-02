@@ -1,5 +1,3 @@
-
-
 const SuperCard = ({ material, needLearn }) => {
   const [isCardReverse, setIsCardReverse] = useState(false);
 
@@ -18,7 +16,7 @@ const SuperCard = ({ material, needLearn }) => {
       <div
         style="
         position: relative;
-        border-radius: 16px;
+        border-radius: 8px;
         width: 100%;
         height: 100%;
         margin: 0 auto;
@@ -28,58 +26,55 @@ const SuperCard = ({ material, needLearn }) => {
         "
       >
         <div class="r-card">
-          <!-- 单词 -->
-          <div class="card_content">
-            <div
-              style="
-                font-size: 18px;
-                width: 100%;
-                font-weight: bold;
-                text-align: center;
-                border: 1px dashed transparent;"
-            >
-              ${material.text}
-            </div>
-            ${needLearn
-              ? ''
-              : html`<div
-                  style="
-                    margin-top: 8px;
-                    width: 100%;
-                    text-align: center;
-                    border: 1px dashed transparent;"
-                >
-                  ${material.translation}
-                </div>`}
+          <div style="background: #fff; height: 160px;overflow-y: auto">
+            <${TfCard} tfData=${material.youdao} />
           </div>
-          <!-- 操作 -->
+
+          <img src="./imgs/icon-separate-long.png" style="width: 100%" />
+
           <div
-            style="
-            height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;"
+            style="background: #fff; height: 160px; overflow-y: auto; padding: 12px;"
           >
-            <svg
+            <div style="display: flex; align-items: center; padding: 3px 0px;">
+              <div style="flex: 1; color: #999">收藏时间：</div>
+              <div style="color: #333">${material.ctime}</div>
+            </div>
+            <div style="display: flex; align-items: center;padding: 3px 0px;">
+              <div style="flex: 1; color: #999">复习级别：</div>
+              <div style="color: #333">${material.learn.level}</div>
+            </div>
+            <div style="display: flex; align-items: center;padding: 3px 0px;">
+              <div style="flex: 1; color: #999">复习时刻：</div>
+              <div style="color: #333">${forLearnState(material)}</div>
+            </div>
+            <div style="display: flex; align-items: center;padding: 3px 0px;">
+              <div style="flex: 1; color: #999">累计词频：</div>
+              <div style="color: #333">
+                ${bluesea.forStatisticAllCount(material)}
+              </div>
+            </div>
+            <div style="display: flex; align-items: center;padding: 3px 0px;">
+              <div style="flex: 1; color: #999">来源：</div>
+              <a
+                href="${material.addFrom}"
+                target="_blank"
+                onClick=${(e) => {
+                  e.stopPropagation();
+                }}
+                >${material.addFrom ? '点此跳转' : '未知来源'}</a
+              >
+            </div>
+
+            <div
               onClick=${() => {
                 setIsCardReverse(true);
               }}
-              t="1586595843384"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="8185"
-              width="40"
-              height="40"
+              style="background: rgba(62, 138, 243, 0.06);color: #3e8af3;
+            width: 192px; height: 32px;line-height: 32px; margin: 0 auto; 
+            text-align: center;  border-radius: 4px;cursor:pointer; margin-top: 24px"
             >
-              <path
-                d="M856 376H648V168c0-8.8-7.2-16-16-16H168c-8.8 0-16 7.2-16 16v464c0 8.8 7.2 16 16 16h208v208c0 8.8 7.2 16 16 16h464c8.8 0 16-7.2 16-16V392c0-8.8-7.2-16-16-16z m-480 16v188H220V220h360v156H392c-8.8 0-16 7.2-16 16z m204 52v136H444V444h136z m224 360H444V648h188c8.8 0 16-7.2 16-16V444h156v360z"
-                p-id="8186"
-                fill="#2c2c2c"
-              ></path>
-            </svg>
+              更多信息
+            </div>
           </div>
         </div>
 
@@ -89,49 +84,19 @@ const SuperCard = ({ material, needLearn }) => {
             setIsCardReverse(false);
           }}
         >
-          <div>
-            <${TfCard} tfData=${material.youdao} />
-          </div>
-          <div class="card_content">
-            <div style="color: #888;">
-              <div style="margin-bottom: 4px;">
-                <div>收藏时间：</div>
-                <div>${material.ctime}</div>
-              </div>
-              <div style="margin-bottom: 4px;">
-                <div>学习等级：</div>
-                <div>${material.learn.level}</div>
-              </div>
-              <div style="margin-bottom: 4px;">
-                <div>下一次学习时间：</div>
-                <div>${material.learn.learnDate}</div>
-              </div>
-              <div style="margin-bottom: 4px;">
-                <div>当日词频：</div>
-                <div>${bluesea.forStatisticTodayCount(material)}</div>
-              </div>
-              <div style="margin-bottom: 4px;">
-                <div>总词频：</div>
-                <div>${bluesea.forStatisticAllCount(material)}</div>
-              </div>
-              <div style="margin-bottom: 4px;">
-                <div>添加自：</div>
-                <div>
-                  <a href="${material.addFrom}" target="_blank" onClick=${(e) => {
-                    e.stopPropagation()
-                  }}>${material.addFrom ? "点击此可跳转" : "未知来源"}</a>
-                </div>
-              </div>
-
-            </div>
-          </div>
+          开发中...
         </div>
       </div>
     </div>
   `;
 };
 
-const ModalLearnCard = ({ visible, onClose, material, allowLearnOperation }) => {
+const ModalLearnCard = ({
+  visible,
+  onClose,
+  material,
+  allowLearnOperation,
+}) => {
   if (!visible) {
     return '';
   }
@@ -164,9 +129,9 @@ const ModalLearnCard = ({ visible, onClose, material, allowLearnOperation }) => 
         }}
         style=${{
           position: 'relative',
-          width: 200,
-          height: 300,
-          marginTop: 40,
+          width: 240,
+          height: 320,
+          marginTop: 64,
           zIndex: 25,
           display: 'flex',
           flexDirection: 'column',
@@ -174,7 +139,7 @@ const ModalLearnCard = ({ visible, onClose, material, allowLearnOperation }) => 
       >
         <${SuperCard} material=${material} needLearn=${needLearn} />
 
-        ${(needLearn && allowLearnOperation)
+        <!-- ${needLearn && allowLearnOperation
           ? html` <div
               style="
                 display: flex;
@@ -217,10 +182,9 @@ const ModalLearnCard = ({ visible, onClose, material, allowLearnOperation }) => 
                 认识
               </div>
             </div>`
-          : ''}
+          : ''} -->
       </div>
     </div>
-    ;
   `;
 };
 
@@ -255,23 +219,35 @@ const ModalSortRules = ({ visible, onClose: close }) => {
         }}
         style=${{
           position: 'relative',
-          width: 200,
-          marginTop: 40,
+          width: 240,
+          marginTop: 64,
           background: '#f4f5f7',
           zIndex: 25,
-          padding: 16,
+          borderRadius: '8px',
         }}
       >
+        <div
+          style="height: 48px; padding: 0px 16px; display: flex; align-items: center;"
+        >
+          <div>排序选择</div>
+          <div style="flex: 1"></div>
+          <img
+            src="./imgs/icon-close.png"
+            style="width: 24px; height: 24px; cursor: pointer"
+            onClick=${() => {
+              close();
+            }}
+          />
+        </div>
         ${Object.entries(bluesea.constant.sortRule).map(([key, label]) => {
-          return html`<div style="margin-bottom: 16px">
-            <div
-              class="btn"
-              onClick=${async () => {
-                close(key);
-              }}
-            >
-              ${label}
-            </div>
+          return html`<div
+            class="hover-row"
+            style="height: 42px;line-height: 42px; padding: 0px 12px; user-select: none"
+            onClick=${async () => {
+              close(key);
+            }}
+          >
+            ${label}
           </div>`;
         })}
       </div>
@@ -372,6 +348,21 @@ const formatDate = (minute) => {
   }
 };
 
+const forLearnState = (it) => {
+  let countdown = 'now';
+  const nowDate = dayjs().format();
+  if (nowDate < it.learn.learnDate) {
+    //如果获取的差异为0，那么默认为1分钟，不存在0分钟的情况
+    const diffMinute = dayjs().diff(it.learn.learnDate, 'minute') || 1;
+    countdown = formatDate(Math.abs(diffMinute));
+  }
+  if (it.learn.done) {
+    countdown = 'done';
+  }
+  return countdown
+}
+
+
 const Material = () => {
   const { list, sortRule, setSortRule } = bluesea.useMaterialsMate();
   let config = bluesea.useConfig();
@@ -399,7 +390,9 @@ const Material = () => {
   }
 
   return html`
-    <div style="height: 400px; overflow-y: auto; box-sizing: border-box;">
+    <div
+      style="height: 100%;  box-sizing: border-box;display: flex; flex-direction: column; padding: 14px 16px ;"
+    >
       <${ModalLearnCard}
         allowLearnOperation=${!config['单词弹幕']}
         visible=${!!selectedMaterial}
@@ -429,30 +422,25 @@ const Material = () => {
 
       <div
         style="
-        position: sticky;
-        top: 0;
-        padding: 4px;
-        background: #fff;
         display: flex;
         align-items: center;"
       >
-        <div style="flex: 1;">
-          <span>排序：</span>
+        <div
+          style="display: flex;align-items: center;cursor: pointer"
+          onclick=${() => {
+          }}
+        >
           <span
-            className="btn_hover"
             style=${{
-              flex: 1,
-              padding: '2px 4px',
-              cursor: 'pointer',
-              userSelect: 'none',
-              borderRadius: 2,
+              color: '#999',
             }}
-            onclick=${() => {
-              setVisibleModalSortRules(true);
-            }}
-            >${bluesea.constant.sortRule[sortRule]}</span
-          >
+            >
+            默认分组
+          </span>
+          <img src="./imgs/btn-drop.png" style="width: 18px; height: 18px;" />
         </div>
+
+        <div style="flex: 1"></div>
 
         <div
           style=${{
@@ -461,13 +449,16 @@ const Material = () => {
           }}
         >
           <div
-            className="btn_hover"
             style=${{
-              flex: 1,
-              padding: '2px 4px',
+              width: 48,
+              height: 24,
+              lineHeight: '24px',
               userSelect: 'none',
-              borderRadius: 2,
-              // cursor: 'not-allowed',
+              borderRadius: '2px',
+              color: '#fff',
+              background: '#3E8AF3',
+              textAlign: 'center',
+              cursor: 'pointer',
             }}
             onClick=${() => {
               const inputEl = document.createElement('input');
@@ -563,15 +554,18 @@ const Material = () => {
           >
             导入
           </div>
-          <div style=${{ padding: 2 }}></div>
+          <div style=${{ width: 12 }}></div>
           <div
-            className="btn_hover"
             style=${{
-              flex: 1,
-              padding: '2px 4px',
-              cursor: 'pointer',
+              width: 48,
+              height: 24,
+              lineHeight: '24px',
               userSelect: 'none',
-              borderRadius: 2,
+              borderRadius: '2px',
+              color: '#fff',
+              background: '#3E8AF3',
+              textAlign: 'center',
+              cursor: 'pointer',
             }}
             onClick=${() => {
               setVisibleModalExport(true);
@@ -581,59 +575,67 @@ const Material = () => {
           </div>
         </div>
       </div>
-      <div style="padding: 4px;flex: 1;" onMouseUp=${e => {
-        const target = e.target;
-        if (!target) 
-          return;
-        
-        let indexElement = target;
-        
-        while (indexElement && indexElement.dataset.index === undefined) {
-          indexElement = indexElement.parentElement;
-        }
-        if (indexElement === null)
-          return;
-        const index = parseInt(indexElement.dataset.index)
-        const item = list[index];
-
-        switch (e.button) {
-          case 0: // 左键
-            if(target.dataset.action === "delete") {
-              bluesea.delMaterial(item.text);
-            } else {
-              setSelectedMaterial(item);
-            }
-            break;
-          case 1: // 中键
-            if(item.addFrom) {
-              window.open(item.addFrom, '_blank');
-            } else {
-              // alert("当前单词不存在添加源")
-            }
-            break;
-          default:
-            break;
-        }
-      }}>
-        <div style="padding: 4px;border-bottom: 1px solid #ccc;display: flex;">
-          <div style="color: #888;">单词词组（${list.length}）</div>
-          <div style="flex:1;"></div>
-          <div style="color: #888;margin-right: 12px;">排序数据</div>
-          <div style="color: #888;">复习倒计时</div>
+      <div
+        style="display: flex; background: #fff; border-radius: 6px;margin: 8px 0; padding: 6px 12px;color: #999;"
+      >
+        <div>单词词组（${list.length}）</div>
+        <div style="flex:1;"></div>
+        <div style="margin-right: 16px;">
+        <div
+          style="display: flex;align-items: center;cursor: pointer"
+          onclick=${() => {
+            setVisibleModalSortRules(true);
+          }}
+        >
+          <span
+            style=${{
+              color: '#999',
+            }}
+            >${bluesea.constant.sortRule[sortRule]}
+          </span>
+          <!-- <img src="./imgs/btn-drop.png" style="width: 18px; height: 18px;" /> -->
         </div>
+      </div>
+        <div style="width: 48px">复习时刻</div>
+      </div>
 
+      <div
+        class="word-list"
+        style="flex: 1;overflow-y: scroll; background: #fff; margin: 0px;border-radius: 6px"
+        onMouseUp=${(e) => {
+          const target = e.target;
+          if (!target) return;
+
+          let indexElement = target;
+
+          while (indexElement && indexElement.dataset.index === undefined) {
+            indexElement = indexElement.parentElement;
+          }
+          if (indexElement === null) return;
+          const index = parseInt(indexElement.dataset.index);
+          const item = list[index];
+
+          switch (e.button) {
+            case 0: // 左键
+              if (target.dataset.action === 'delete') {
+                bluesea.delMaterial(item.text);
+              } else {
+                setSelectedMaterial(item);
+              }
+              break;
+            case 1: // 中键
+              if (item.addFrom) {
+                window.open(item.addFrom, '_blank');
+              } else {
+                // alert("当前单词不存在添加源")
+              }
+              break;
+            default:
+              break;
+          }
+        }}
+      >
         ${list.map((it, index) => {
-          let countdown = 'now';
-          const nowDate = dayjs().format();
-          if (nowDate < it.learn.learnDate) {
-            //如果获取的差异为0，那么默认为1分钟，不存在0分钟的情况
-            const diffMinute = dayjs().diff(it.learn.learnDate, 'minute') || 1;
-            countdown = formatDate(Math.abs(diffMinute));
-          }
-          if (it.learn.done) {
-            countdown = 'done';
-          }
-
           let infoText = {
             ctime: dayjs(it.ctime).format('YYYY-MM-DD'),
             learnTime: dayjs(it.learn.learnDate).format('YYYY-MM-DD'),
@@ -644,33 +646,30 @@ const Material = () => {
           }[sortRule];
 
           return html`<div class="word-row" data-index="${index}">
-            <div
-              style="flex: 1;display: flex;"
-            >
-              <div style="cursor: default">${it.text}</div>
-              <div style="margin-left:16px; font-weight:300; cursor:default;">
-                ${it.translation}
-              </div>
-              <div style="flex:1;"></div>
+            <div style="cursor: default">${it.text}</div>
+            <div style="margin-left:16px; font-weight:300; cursor:default;">
+              ${it.translation}
+            </div>
 
+            <div style="flex:1;"></div>
+
+            <div class="word-infos">
               <div
-                style="color: #888;margin-right: 16px;text-align: right;min-width: 24px;"
+                style="margin-right: 16px;text-align: right;min-width: 24px;"
               >
                 ${infoText}
               </div>
-              <div
-                style="color: #888;margin-right: 0px;text-align: right;min-width: 24px;"
-              >
-                ${countdown}
+              <div style="margin-right: 0px;text-align: right;min-width: 48px;">
+                ${forLearnState(it)}
               </div>
             </div>
 
             <div class="word-options">
               <span
-                style="color:#f00; margin-left: 8px;"
+                style="color:#ff4d4f; margin-left: 16px;"
                 data-action="delete"
-              >删除</span
-            >
+                >删除</span
+              >
             </div>
           </div>`;
         })}

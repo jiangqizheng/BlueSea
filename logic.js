@@ -31,9 +31,15 @@ class Storage {
   async get() {
     return new Promise(async (resolve) => {
       const storage = await this._getRootStorage();
-      storage.local.get(this.key, (obj) => {
-        resolve(obj[this.key]);
-      });
+      try {
+        storage.local.get(this.key, (obj) => {
+          resolve(obj[this.key]);
+        })
+      } catch(e) {
+        console.error(e)
+        location.href = location.href
+      }
+  
     });
   }
   async set(value) {
@@ -69,7 +75,14 @@ const defaultConfig = {
   隐藏完成复习的单词: true,
   单词弹幕速度: 12,
   有道智云key: '',
-  有道智云appkey: ''
+  有道智云appkey: '',
+  高亮样式配置: {
+    learnLevel: {
+      '0,1,2': '',
+      '3,4,5': '',
+      '6,7,8': null,
+    },
+  },
   // 记忆曲线自定义: [],
   // 高亮单词样式: '',
   // 黑名单内标签，将不会激活划词功能
@@ -79,12 +92,12 @@ const defaultConfig = {
 class BlueSea {
   constant = {
     sortRule: {
-      ctime: '创建时间（近->远）',
-      learnTime: '复习时间（近->远）',
-      learnLevel: '复习级别(低->高)',
-      tabCount: '当前页面词频（高->低）',
-      todayCount: '当天词频（高->低）',
-      count: '总词频（高->低）',
+      ctime: '创建时间(近→远)',
+      learnTime: '复习时间(近→远)',
+      learnLevel: '复习级别(低→高)',
+      tabCount: '当前页面词频(高→低)',
+      todayCount: '当天词频(高→低)',
+      count: '总词频(高→低)',
     },
   };
   forgettingCurve = [
@@ -135,7 +148,6 @@ class BlueSea {
     }
   }
 
-
   async setMaterials(l) {
     return materialsDB.set(l);
   }
@@ -165,8 +177,8 @@ class BlueSea {
 
   async updateMaterialObj(material) {
     const l = await this.getMaterials();
-    const i = l.findIndex(it => it.text === material.text)
-    l.splice(i, 1, material)
+    const i = l.findIndex((it) => it.text === material.text);
+    l.splice(i, 1, material);
     await this.setMaterials(l);
   }
 

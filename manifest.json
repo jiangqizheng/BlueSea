@@ -4,11 +4,7 @@
   "version": "0.0.1",
   "manifest_version": 2,
   "homepage_url": "https://github.com/jiangqizheng/BlueSea",
-  "permissions": [
-    "storage",
-    "unlimitedStorage",
-    "tabs"
-  ],
+  "permissions": ["storage", "unlimitedStorage", "tabs"],
   "background": {
     "scripts": [
       "lib/dayjs.js",
@@ -21,6 +17,9 @@
     "default_popup": "popup/popup.html",
     "default_icon": "icon.png"
   },
+  "options_ui": {
+    "page": "options/options.html"
+ },
   "content_scripts": [
     {
       "all_frames": false,
@@ -29,6 +28,7 @@
         "lib/standalone.module.mini.js",
         "lib/webcomponents-sd-ce.js",
         "logic.js",
+        "content_scripts/analysis.jsx",
         "content_scripts/tip.jsx",
         "content_scripts/highlighter.js",
         "content_scripts/selection.js",
@@ -36,7 +36,7 @@
         "content_scripts/bullet-screens.jsx"
       ],
       "css": ["content_scripts/selection.css"],
-      "matches": ["<all_urls>"],
+      "matches": ["http://*/*", "https://*/*", "ftp://*/*", "file://*/*"],
       "run_at": "document_start"
     }
   ],

@@ -14,11 +14,11 @@ const Search = () => {
     .slice(0, 8);
 
   return html`
-    <div style="height: 400px; overflow-y: auto; box-sizing: border-box;">
+    <div style="height: 100%; overflow-y: auto; box-sizing: border-box;">
       <div>
         <input
           class="search-input"
-          placeholder="查词"
+          placeholder="输入单词或文字"
           value=${text}
           onInput=${(e) => {
             setText(e.target.value);
@@ -31,10 +31,12 @@ const Search = () => {
         <div
           style="
         background: #fff;
-        width: 260px;
+        width: 240px;
         margin: 0 auto;
         margin-top: 16px;
-        border-radius: 4px;"
+        border-radius: 4px;
+        overflow:hidden;
+        "
         >
           ${options.length === 0 &&
           text &&
@@ -42,7 +44,7 @@ const Search = () => {
           ${options.length === 0 &&
           !text &&
           html`<div class="search-tip">
-            请在上方输入框中，输入英文进行数据检索。目前仅支持对已收藏单词进行检索。
+            目前仅支持对已收藏单词进行检索
           </div>`}
           ${options.map(
             (it) =>
@@ -53,7 +55,7 @@ const Search = () => {
                   setText(it.text);
                 }}
               >
-                ${it.text}: ${it.translation}
+                <span style="font-weight: bold; color: #3E8AF3 ">${it.text}</span><span style="margin-left: 12px;color: #999">${it.translation}</span>
               </div>`
           )}
         </div>
@@ -61,7 +63,7 @@ const Search = () => {
       ${material &&
       html`<div
         style="
-        width: 260px;
+        width: 240px;
         margin: 0 auto;
         margin-top: 16px;
         min-height: 100px;

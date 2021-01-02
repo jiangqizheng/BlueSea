@@ -8,31 +8,47 @@
   <body>
     <style>
       .search-input {
-        width: 260px;
+        width: 240px;
         margin: 0 auto;
-        margin-top: 24px;
+        margin-top: 36px;
         display: block;
-        font-size: 24px;
-        padding: 4px 6px;
+        font-size: 14px;
+        height: 42px;
+        line-height: 42px;
+        padding-left: 42px;
+        border-radius: 4px;
+        outline: none;
+        border: 1px solid #3e8af3;
+        padding-top: 1px;
+        color: #3e8af3;
+        background-color: rgba(62, 138, 243, 0.1);
+        background: rgba(62, 138, 243, 0.06) url(./imgs/icon-search.png)
+          no-repeat;
+        background-size: 18px;
+        background-position: 12px 50%;
       }
 
       .search-input::-webkit-input-placeholder {
-        color: #ccc;
+        color: rgba(62, 138, 243, 0.6);
+        position: relative;
+        top: 1px;
       }
       .search-tip {
+       
         padding: 8px;
-        font-size: 12px;
-        color: #888;
+        /* font-size: 12px; */
+        color: #999;
         border-bottom: 1px solid #f1f1f1;
       }
       .search-item {
         display: block;
-        font-size: 24px;
-        padding: 4px 6px;
+        height: 42px;
+        line-height: 42px;
+        padding: 0 12px;
+        cursor: pointer;
       }
       .search-item:hover {
-        background: rgba(0, 0, 0, 0.1);
-        cursor: pointer;
+        background: rgba(62, 138, 243, 0.06);
       }
 
       body,
@@ -40,24 +56,45 @@
         box-sizing: border-box;
         padding: 0;
         margin: 0;
+        font-size: 12px;
+      }
+
+      .hover-row {
+        color: #999
+      }
+      .hover-row:hover {
+        color: rgba(62, 138, 243, 1);
+        background: rgba(62, 138, 243, 0.06);
       }
 
       .word-row {
-        padding: 4px;
-        border-bottom: 1px solid #ccc;
+        padding: 0px 12px;
+        height: 42px;
+        line-height: 42px;
+        display: flex;
+        color: #999;
         display: flex;
       }
 
       .word-row:hover {
-        background: rgba(0, 0, 0, 0.1);
+        color: rgba(62, 138, 243, 1);
+        background: rgba(62, 138, 243, 0.06);
       }
       .word-row:hover .word-options {
         display: block;
       }
 
+      .word-row:hover .word-infos {
+        display: none;
+      }
+
+      .word-infos {
+        display: flex;
+        align-items: center;
+      }
+
       .word-options {
         display: none;
-        font-size: 12px;
         cursor: pointer;
       }
 
@@ -84,9 +121,10 @@
         background: #e4f0f6;
       }
 
+
       /* super-card */
 
-      .card {
+      /* .card {
         position: relative;
         border-radius: 16px;
         width: 100%;
@@ -94,19 +132,18 @@
         margin: 0 auto;
         transition: all 240ms;
         transform-style: preserve-3d;
-      }
+      } */
 
       .r-card {
         display: block;
         position: absolute;
         width: 100%;
         height: 100%;
-        border-radius: 16px;
+        border-radius: 8px;
         box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        background: rgba(255, 255, 255, 1);
         backface-visibility: hidden;
       }
 
@@ -124,12 +161,10 @@
       .card_content {
         position: relative;
         z-index: 0;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
+      }
+
+      *::-webkit-scrollbar {
+        width: 0 !important;
       }
     </style>
     <script src="../lib/codemirror/codemirror.js"></script>
