@@ -17,7 +17,7 @@ const formatDate = (minute) => {
 
 export const forLearnState = (it) => {
   let countdown = 'now';
-  const nowDate = dayjs().format();
+  const nowDate = dayjs().format('YYYY-MM-DD HH:mm:ss');
   if (nowDate < it.learn.learnDate) {
     //如果获取的差异为0，那么默认为1分钟，不存在0分钟的情况
     const diffMinute = dayjs().diff(it.learn.learnDate, 'minute') || 1;
@@ -227,7 +227,7 @@ export const ModalLearnCard = ({
     return '';
   }
 
-  const needLearn = dayjs().format() > material.learn.learnDate;
+  const needLearn = dayjs().format('YYYY-MM-DD HH:mm:ss') > material.learn.learnDate;
 
   return (
     <div

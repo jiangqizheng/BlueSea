@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 
+const formatStr = 'YYYY-MM-DD HH:mm:ss'
+
 class Storage {
   constructor(key) {
     this.key = key;
@@ -163,7 +165,7 @@ class BlueSea {
       text: t,
       textExts,
       translation: youdao.translation[0],
-      ctime: dayjs().format(),
+      ctime: dayjs().format(formatStr),
       learn: this.createLearnObj(),
       // 保留完整数据，后面可能会使用
       youdao,
@@ -360,14 +362,14 @@ class BlueSea {
     return {
       level: 0,
       // 在一个时间节点内出现几次才进入下一个节点，并计算下个节点的时间。如果多次点没记住，那么就回滚到上个级别，以此类推。
-      learnDate: dayjs().add(this.forgettingCurve[0], 'm').format(),
+      learnDate: dayjs().add(this.forgettingCurve[0], 'm').format(formatStr),
     };
   }
 
   async getNeedLearnList() {
     const materialList = await this.getMaterials();
     const l2 = materialList.filter(({ learn }) => {
-      return dayjs().format() > learn.learnDate;
+      return dayjs().format(formatStr) > learn.learnDate;
     });
 
     return l2;
@@ -379,14 +381,14 @@ class BlueSea {
     const level = material.learn.level + 1;
 
     if (this.forgettingCurve[level]) {
-      const time = dayjs().add(this.forgettingCurve[level], 'm').format();
+      const time = dayjs().add(this.forgettingCurve[level], 'm').format(formatStr);
       material.learn = {
         level,
         learnDate: time,
       };
     } else {
       material.learn = {
-        learnDate: dayjs().format(),
+        learnDate: dayjs().format(formatStr),
         done: true,
       };
     }
@@ -398,7 +400,7 @@ class BlueSea {
     const material = materialList.find((it) => it.text === text);
     material.learn = {
       level: 0,
-      learnDate: dayjs().add(this.forgettingCurve[0], 'm').format(),
+      learnDate: dayjs().add(this.forgettingCurve[0], 'm').format(formatStr),
     };
     await this.setMaterials(materialList);
   }
