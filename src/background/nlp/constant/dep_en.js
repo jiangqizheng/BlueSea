@@ -1,0 +1,186 @@
+export default {
+  acl: {
+    LABEL: 'acl',
+    DESCRIPTION: 'clausal modifier of noun (adjectival clause)',
+    DESCRIPTION_zh: '名词的从句修饰语（形容词从句）',
+  },
+  acomp: {
+    LABEL: 'acomp',
+    DESCRIPTION: 'adjectival complement',
+    DESCRIPTION_zh: '形容词补语',
+  },
+  advcl: {
+    LABEL: 'advcl',
+    DESCRIPTION: 'adverbial clause modifier',
+    DESCRIPTION_zh: '状语从句修饰语',
+  },
+  advmod: {
+    LABEL: 'advmod',
+    DESCRIPTION: 'adverbial modifier',
+    DESCRIPTION_zh: '状语',
+  },
+  agent: { LABEL: 'agent', DESCRIPTION: 'agent', DESCRIPTION_zh: '代理人' },
+  amod: {
+    LABEL: 'amod',
+    DESCRIPTION: 'adjectival modifier',
+    DESCRIPTION_zh: '形容词',
+  },
+  appos: {
+    LABEL: 'appos',
+    DESCRIPTION: 'appositional modifier',
+    DESCRIPTION_zh: '同位修饰语',
+  },
+  attr: { LABEL: 'attr', DESCRIPTION: 'attribute', DESCRIPTION_zh: '属性' },
+  aux: { LABEL: 'aux', DESCRIPTION: 'auxiliary', DESCRIPTION_zh: '辅助的' },
+  auxpass: {
+    LABEL: 'auxpass',
+    DESCRIPTION: 'auxiliary (passive)',
+    DESCRIPTION_zh: '辅助（被动）',
+  },
+  case: {
+    LABEL: 'case',
+    DESCRIPTION: 'case marking',
+    DESCRIPTION_zh: '案例标记',
+  },
+  cc: {
+    LABEL: 'cc',
+    DESCRIPTION: 'coordinating conjunction',
+    DESCRIPTION_zh: '并列连词',
+  },
+  ccomp: {
+    LABEL: 'ccomp',
+    DESCRIPTION: 'clausal complement',
+    DESCRIPTION_zh: '子句补语',
+  },
+  compound: {
+    LABEL: 'compound',
+    DESCRIPTION: 'compound',
+    DESCRIPTION_zh: '复合',
+  },
+  conj: { LABEL: 'conj', DESCRIPTION: 'conjunct', DESCRIPTION_zh: '合相' },
+  cop: { LABEL: 'cop', DESCRIPTION: 'copula', DESCRIPTION_zh: '系词' },
+  csubj: {
+    LABEL: 'csubj',
+    DESCRIPTION: 'clausal subject',
+    DESCRIPTION_zh: '子句主体',
+  },
+  csubjpass: {
+    LABEL: 'csubjpass',
+    DESCRIPTION: 'clausal subject (passive)',
+    DESCRIPTION_zh: '子句（被动）',
+  },
+  dative: { LABEL: 'dative', DESCRIPTION: 'dative', DESCRIPTION_zh: '和格' },
+  dep: {
+    LABEL: 'dep',
+    DESCRIPTION: 'unclassified dependent',
+    DESCRIPTION_zh: '未分类的依赖',
+  },
+  det: { LABEL: 'det', DESCRIPTION: 'determiner', DESCRIPTION_zh: '确定' },
+  dobj: {
+    LABEL: 'dobj',
+    DESCRIPTION: 'direct object',
+    DESCRIPTION_zh: '直接宾语',
+  },
+  expl: { LABEL: 'expl', DESCRIPTION: 'expletive', DESCRIPTION_zh: '冒犯性的' },
+  intj: { LABEL: 'intj', DESCRIPTION: 'interjection', DESCRIPTION_zh: '欹' },
+  mark: { LABEL: 'mark', DESCRIPTION: 'marker', DESCRIPTION_zh: 'marker' },
+  meta: {
+    LABEL: 'meta',
+    DESCRIPTION: 'meta modifier',
+    DESCRIPTION_zh: '元编辑',
+  },
+  neg: {
+    LABEL: 'neg',
+    DESCRIPTION: 'negation modifier',
+    DESCRIPTION_zh: '否定',
+  },
+  nn: {
+    LABEL: 'nn',
+    DESCRIPTION: 'noun compound modifier',
+    DESCRIPTION_zh: '名词复合修饰语',
+  },
+  nounmod: {
+    LABEL: 'nounmod',
+    DESCRIPTION: 'modifier of nominal',
+    DESCRIPTION_zh: '标称修饰词',
+  },
+  npmod: {
+    LABEL: 'npmod',
+    DESCRIPTION: 'noun phrase as adverbial modifier',
+    DESCRIPTION_zh: '名词短语作为副词修饰语',
+  },
+  nsubj: {
+    LABEL: 'nsubj',
+    DESCRIPTION: 'nominal subject',
+    DESCRIPTION_zh: '名词性主语',
+  },
+  nsubjpass: {
+    LABEL: 'nsubjpass',
+    DESCRIPTION: 'nominal subject (passive)',
+    DESCRIPTION_zh: '名义科目（被动）',
+  },
+  nummod: {
+    LABEL: 'nummod',
+    DESCRIPTION: 'numeric modifier',
+    DESCRIPTION_zh: '数值编辑',
+  },
+  oprd: {
+    LABEL: 'oprd',
+    DESCRIPTION: 'object predicate',
+    DESCRIPTION_zh: '对象谓词',
+  },
+  obj: { LABEL: 'obj', DESCRIPTION: 'object', DESCRIPTION_zh: '目的' },
+  obl: {
+    LABEL: 'obl',
+    DESCRIPTION: 'oblique nominal',
+    DESCRIPTION_zh: '斜标称',
+  },
+  parataxis: {
+    LABEL: 'parataxis',
+    DESCRIPTION: 'parataxis',
+    DESCRIPTION_zh: '趋同性',
+  },
+  pcomp: {
+    LABEL: 'pcomp',
+    DESCRIPTION: 'complement of preposition',
+    DESCRIPTION_zh: '介词的补语',
+  },
+  pobj: {
+    LABEL: 'pobj',
+    DESCRIPTION: 'object of preposition',
+    DESCRIPTION_zh: '介词宾语',
+  },
+  poss: {
+    LABEL: 'poss',
+    DESCRIPTION: 'possession modifier',
+    DESCRIPTION_zh: '拥有权',
+  },
+  preconj: {
+    LABEL: 'preconj',
+    DESCRIPTION: 'pre-correlative conjunction',
+    DESCRIPTION_zh: '关联前连词',
+  },
+  prep: {
+    LABEL: 'prep',
+    DESCRIPTION: 'prepositional modifier',
+    DESCRIPTION_zh: '介词修饰语',
+  },
+  prt: { LABEL: 'prt', DESCRIPTION: 'particle', DESCRIPTION_zh: '粒子' },
+  punct: { LABEL: 'punct', DESCRIPTION: 'punctuation', DESCRIPTION_zh: '标点' },
+  quantmod: {
+    LABEL: 'quantmod',
+    DESCRIPTION: 'modifier of quantifier',
+    DESCRIPTION_zh: '修改量化',
+  },
+  relcl: {
+    LABEL: 'relcl',
+    DESCRIPTION: 'relative clause modifier',
+    DESCRIPTION_zh: '相对从句修饰',
+  },
+  root: { LABEL: 'root', DESCRIPTION: 'root', DESCRIPTION_zh: '根' },
+  xcomp: {
+    LABEL: 'xcomp',
+    DESCRIPTION: 'open clausal complement',
+    DESCRIPTION_zh: '开放式补语',
+  },
+};

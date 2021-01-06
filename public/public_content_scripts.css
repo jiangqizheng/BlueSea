@@ -1,0 +1,161 @@
+xmark.gloab-xmark {
+  padding: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
+  text-decoration-style: wavy;
+  text-decoration-color: rgb(57, 136, 255);
+  text-decoration-line: underline;
+  text-decoration-skip-ink: none;
+  position: relative;
+}
+
+xmark.gloab-xmark:hover {
+  font-style: normal;
+  padding: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 3px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  background: rgb(57, 136, 255);
+}
+
+/* tooltip */
+
+.bluesea-tip {
+  position: relative;
+  background: #f5f5d5;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #222;
+  border: 1px solid #444;
+  box-sizing: border-box;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+}
+.bluesea-tip > * {
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.bluesea-tip-row {
+  display: flex;
+  align-items: center;
+}
+.bluesea-tip-btn-wrap {
+  display: flex;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+.bluesea-tip-btn {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  padding: 6px 8px;
+  transition: 200ms all;
+}
+/* 覆盖chrome翻译的默认小按钮 */
+#gtx-trans {
+  z-index: 2147483645;
+}
+
+/* bullet-screens */
+.bluesea-bullet {
+  position: fixed;
+  text-align: center;
+  left: 500px;
+  width: 180px;
+  z-index: 2147483646;
+  border-radius: 4px;
+  padding: 8px;
+}
+.bluesea-bullet,
+.bluesea-bullet > * {
+  font-size: 14px;
+}
+
+@keyframes bluesea-bullet-animation {
+  from {
+    left: 100%;
+    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    left: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+/* analysis */
+.bluesea-analysis-wrap {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2147483647;
+  font-size: 14px;
+}
+
+.bluesea-analysis-wrap *::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+
+/* _dis_theme.sass */
+.displacy-word {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.displacy-tag {
+  font: 14px 'Input Mono Compressed', Consolas, 'Andale Mono', Menlo, Monaco,
+    Courier, monospace;
+  color: #a6e22d;
+}
+
+.displacy-label {
+  font: 12px 'Input Mono Compressed', Consolas, 'Andale Mono', Menlo, Monaco,
+    Courier, monospace;
+  color: #87908a;
+}
+
+.displacy-arc {
+  color: #87908a;
+}
+
+.displacy-arrowhead {
+  color: #ffffff;
+}
+
+[data-format='spacy'] .displacy-tag[data-tag^='NN'] {
+  color: #fd9720;
+}
+
+[data-format='spacy'] .displacy-tag[data-tag^='VB'] {
+  color: #e00084;
+}
+
+[data-format='spacy'] .displacy-tag[data-tag^='.'] {
+  color: #87908a;
+}
+
+[data-format='spacy'] .displacy-tag[data-tag^=','] {
+  color: #87908a;
+}
+
+[data-format='google'] .displacy-tag[data-tag^='NOUN'] {
+  color: #fd9720;
+}
+
+[data-format='google'] .displacy-tag[data-tag^='VERB'] {
+  color: #e00084;
+}
+
+[data-format='google'] .displacy-tag[data-tag^='PUNCT'] {
+  color: #87908a;
+}

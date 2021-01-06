@@ -1,0 +1,299 @@
+{
+  "success": true,
+  "content": {
+    "words": [
+      {
+        "text": "I",
+        "tag": "PRON",
+        "lemma": null,
+        "tag_extend": "PRP",
+        "tag_obj": {
+          "POS": "PRON",
+          "DESCRIPTION": "pronoun",
+          "DESCRIPTION_zh": "代词",
+          "examples": "I, you, he, she, myself, themselves, somebody"
+        },
+        "tag_extend_obj": {
+          "TAG": "PRP",
+          "POS": "PRON",
+          "MORPHOLOGY": "PronType=prs",
+          "DESCRIPTION": "pronoun, personal",
+          "DESCRIPTION_zh": "人称代词"
+        }
+      },
+      {
+        "text": "did",
+        "tag": "AUX",
+        "lemma": null,
+        "tag_extend": "VBD",
+        "tag_obj": {
+          "POS": "AUX",
+          "DESCRIPTION": "auxiliary",
+          "DESCRIPTION_zh": "助动词",
+          "examples": "is, has (done), will (do), should (do)"
+        },
+        "tag_extend_obj": {
+          "TAG": "VBD",
+          "POS": "VERB",
+          "MORPHOLOGY": "VerbForm=fin Tense=past",
+          "DESCRIPTION": "verb, past tense",
+          "DESCRIPTION_zh": "动词，过去式"
+        }
+      },
+      {
+        "text": "not",
+        "tag": "PART",
+        "lemma": null,
+        "tag_extend": "RB",
+        "tag_obj": {
+          "POS": "PART",
+          "DESCRIPTION": "particle",
+          "DESCRIPTION_zh": "助词",
+          "examples": "’s, not,"
+        },
+        "tag_extend_obj": {
+          "TAG": "RB",
+          "POS": "ADV",
+          "MORPHOLOGY": "Degree=pos",
+          "DESCRIPTION": "adverb",
+          "DESCRIPTION_zh": "副词"
+        }
+      },
+      {
+        "text": "begin",
+        "tag": "VERB",
+        "lemma": null,
+        "tag_extend": "VB",
+        "tag_obj": {
+          "POS": "VERB",
+          "DESCRIPTION": "verb",
+          "DESCRIPTION_zh": "动词",
+          "examples": "run, runs, running, eat, ate, eating"
+        },
+        "tag_extend_obj": {
+          "TAG": "VB",
+          "POS": "VERB",
+          "MORPHOLOGY": "VerbForm=inf",
+          "DESCRIPTION": "verb, base form",
+          "DESCRIPTION_zh": "动词，基本形式"
+        }
+      },
+      {
+        "text": "to",
+        "tag": "PART",
+        "lemma": null,
+        "tag_extend": "TO",
+        "tag_obj": {
+          "POS": "PART",
+          "DESCRIPTION": "particle",
+          "DESCRIPTION_zh": "助词",
+          "examples": "’s, not,"
+        },
+        "tag_extend_obj": {
+          "TAG": "TO",
+          "POS": "PART",
+          "MORPHOLOGY": "PartType=inf VerbForm=inf",
+          "DESCRIPTION": "infinitival “to”",
+          "DESCRIPTION_zh": "不定式的 “to”"
+        }
+      },
+      {
+        "text": "work",
+        "tag": "VERB",
+        "lemma": null,
+        "tag_extend": "VB",
+        "tag_obj": {
+          "POS": "VERB",
+          "DESCRIPTION": "verb",
+          "DESCRIPTION_zh": "动词",
+          "examples": "run, runs, running, eat, ate, eating"
+        },
+        "tag_extend_obj": {
+          "TAG": "VB",
+          "POS": "VERB",
+          "MORPHOLOGY": "VerbForm=inf",
+          "DESCRIPTION": "verb, base form",
+          "DESCRIPTION_zh": "动词，基本形式"
+        }
+      },
+      {
+        "text": "till",
+        "tag": "SCONJ",
+        "lemma": null,
+        "tag_extend": "IN",
+        "tag_obj": {
+          "POS": "SCONJ",
+          "DESCRIPTION": "subordinating conjunction",
+          "DESCRIPTION_zh": "从属连词",
+          "examples": "if, while, that"
+        },
+        "tag_extend_obj": {
+          "TAG": "IN",
+          "POS": "ADP",
+          "MORPHOLOGY": "",
+          "DESCRIPTION": "conjunction, subordinating or preposition",
+          "DESCRIPTION_zh": "连词，从属词或介词"
+        }
+      },
+      {
+        "text": "he",
+        "tag": "PRON",
+        "lemma": null,
+        "tag_extend": "PRP",
+        "tag_obj": {
+          "POS": "PRON",
+          "DESCRIPTION": "pronoun",
+          "DESCRIPTION_zh": "代词",
+          "examples": "I, you, he, she, myself, themselves, somebody"
+        },
+        "tag_extend_obj": {
+          "TAG": "PRP",
+          "POS": "PRON",
+          "MORPHOLOGY": "PronType=prs",
+          "DESCRIPTION": "pronoun, personal",
+          "DESCRIPTION_zh": "人称代词"
+        }
+      },
+      {
+        "text": "had",
+        "tag": "AUX",
+        "lemma": null,
+        "tag_extend": "VBD",
+        "tag_obj": {
+          "POS": "AUX",
+          "DESCRIPTION": "auxiliary",
+          "DESCRIPTION_zh": "助动词",
+          "examples": "is, has (done), will (do), should (do)"
+        },
+        "tag_extend_obj": {
+          "TAG": "VBD",
+          "POS": "VERB",
+          "MORPHOLOGY": "VerbForm=fin Tense=past",
+          "DESCRIPTION": "verb, past tense",
+          "DESCRIPTION_zh": "动词，过去式"
+        }
+      },
+      {
+        "text": "gone.",
+        "tag": "VERB",
+        "lemma": null,
+        "tag_extend": "VBN",
+        "tag_obj": {
+          "POS": "VERB",
+          "DESCRIPTION": "verb",
+          "DESCRIPTION_zh": "动词",
+          "examples": "run, runs, running, eat, ate, eating"
+        },
+        "tag_extend_obj": {
+          "TAG": "VBN",
+          "POS": "VERB",
+          "MORPHOLOGY": "VerbForm=part Tense=past Aspect=perf",
+          "DESCRIPTION": "verb, past participle",
+          "DESCRIPTION_zh": "动词，过去分词"
+        }
+      }
+    ],
+    "arcs": [
+      {
+        "start": 0,
+        "end": 3,
+        "label": "nsubj",
+        "dir": "left",
+        "label_obj": {
+          "LABEL": "nsubj",
+          "DESCRIPTION": "nominal subject",
+          "DESCRIPTION_zh": "名词性主语"
+        }
+      },
+      {
+        "start": 1,
+        "end": 3,
+        "label": "aux",
+        "dir": "left",
+        "label_obj": {
+          "LABEL": "aux",
+          "DESCRIPTION": "auxiliary",
+          "DESCRIPTION_zh": "辅助的"
+        }
+      },
+      {
+        "start": 2,
+        "end": 3,
+        "label": "neg",
+        "dir": "left",
+        "label_obj": {
+          "LABEL": "neg",
+          "DESCRIPTION": "negation modifier",
+          "DESCRIPTION_zh": "否定"
+        }
+      },
+      {
+        "start": 4,
+        "end": 5,
+        "label": "aux",
+        "dir": "left",
+        "label_obj": {
+          "LABEL": "aux",
+          "DESCRIPTION": "auxiliary",
+          "DESCRIPTION_zh": "辅助的"
+        }
+      },
+      {
+        "start": 3,
+        "end": 5,
+        "label": "xcomp",
+        "dir": "right",
+        "label_obj": {
+          "LABEL": "xcomp",
+          "DESCRIPTION": "open clausal complement",
+          "DESCRIPTION_zh": "开放式补语"
+        }
+      },
+      {
+        "start": 6,
+        "end": 9,
+        "label": "mark",
+        "dir": "left",
+        "label_obj": {
+          "LABEL": "mark",
+          "DESCRIPTION": "marker",
+          "DESCRIPTION_zh": "marker"
+        }
+      },
+      {
+        "start": 7,
+        "end": 9,
+        "label": "nsubj",
+        "dir": "left",
+        "label_obj": {
+          "LABEL": "nsubj",
+          "DESCRIPTION": "nominal subject",
+          "DESCRIPTION_zh": "名词性主语"
+        }
+      },
+      {
+        "start": 8,
+        "end": 9,
+        "label": "aux",
+        "dir": "left",
+        "label_obj": {
+          "LABEL": "aux",
+          "DESCRIPTION": "auxiliary",
+          "DESCRIPTION_zh": "辅助的"
+        }
+      },
+      {
+        "start": 3,
+        "end": 9,
+        "label": "advcl",
+        "dir": "right",
+        "label_obj": {
+          "LABEL": "advcl",
+          "DESCRIPTION": "adverbial clause modifier",
+          "DESCRIPTION_zh": "状语从句修饰语"
+        }
+      }
+    ],
+    "settings": { "lang": "en", "direction": "ltr" }
+  }
+}
