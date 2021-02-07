@@ -518,8 +518,8 @@ const Material = () => {
                         alert(`导入失败: ${e}`);
                       }
                     } else if (type === 'text/plain') {
-                      let l = evt.target.result
-                        .split('\n')
+                      let lines = evt.target.result.split('\n');
+                      let l = lines
                         .filter((it) => {
                           return !list.some((it2) => it === it2.text);
                         })
@@ -536,19 +536,30 @@ const Material = () => {
                           );
                         });
                       };
-
-                      if (l.length > 20) {
-                        alert('使用.txt进行导入时，一次性不能超过20条数据');
-                        return;
-                      }
-
                       let result = [];
-                      for (let it of l) {
-                        const youdao = await tf(it);
-                        const material = bluesea.createMaterialObj(it, youdao);
-                        result.push(material);
-                      }
+                      if (lines[0]!=="CUSTOM!") {
+                          if (l.length > 20) {
+                              alert('使用.txt进行导入时，一次性不能超过20条数据');
+                              return;
+                          }
 
+                          for (let it of l) {
+                              const youdao = await tf(it);
+                              const material = bluesea.createMaterialObj(it, youdao);
+                              result.push(material);
+                          }
+                      }else{
+                          for (let i = 1; i < l.length; i++) {
+                              let splits = l[i].split(",");
+                              // 缓和解决大批量导入无响应等问题
+                              if (i%30===0){
+                                  alert(`已导入${i}条数据`)
+                              }
+                              const youdao = await tf(splits[0]);
+                              const material = bluesea.createMaterialObj(splits[0], youdao, splits[1]);
+                              result.push(material);
+                          }
+                      }
                       materialsDB.set([...list, ...result]);
 
                       alert(
