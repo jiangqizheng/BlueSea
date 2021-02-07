@@ -551,7 +551,10 @@ const Material = () => {
                       }else{
                           for (let i = 1; i < l.length; i++) {
                               let splits = l[i].split(",");
-                              alert(splits)
+                              // 缓和解决大批量导入无响应等问题
+                              if (i%30===0){
+                                  alert(`已导入${i}条数据`)
+                              }
                               const youdao = await tf(splits[0]);
                               const material = bluesea.createMaterialObj(splits[0], youdao, splits[1]);
                               result.push(material);
