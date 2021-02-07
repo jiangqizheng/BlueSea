@@ -140,7 +140,7 @@ class BlueSea {
     return materialsDB.set(l);
   }
 
-  createMaterialObj(text, youdao) {
+  createMaterialObj(text, youdao,custom=undefined) {
     let t = text;
     let textExts = [];
     if (youdao.returnPhrase) {
@@ -153,7 +153,8 @@ class BlueSea {
     const material = {
       text: t,
       textExts,
-      translation: youdao.translation[0],
+      //  用于导入某些助记或特殊翻译等不需要过于官方的翻译
+      translation: custom ? custom:youdao.translation[0],
       ctime: dayjs().format(),
       learn: this.createLearnObj(),
       // 保留完整数据，后面可能会使用
