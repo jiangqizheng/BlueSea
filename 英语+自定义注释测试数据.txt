@@ -1,4 +1,240 @@
 CUSTOM!
-test,测啊
-add,啊哈
+accordion,可折叠的，褶叠的
+agile,敏捷、灵活的
+agnostic,不可知论的
+arbitrary,任意的
+asynchronous,异步的
+comprehensive,综合的，广泛的
+concrete,具体的、有形的
+concurrent,并发的，同时发生的
+consultative,咨询的
+cost-effective,有成本效益的，合算的
+cost-efficient,有成本效益的，合算的
+critical,关键的，重要的，批评的
+crucial,重要的，决定性的
+customized,定制的，个性化的
+declarative,声明式
+dedicated,专属的
+deprecated,弃用的
+diversified,多样化的
+elastic,灵活有弹性的
+ephemeral,短暂性的
+explicit,明确清楚的
+granular,颗粒的
+hierarchical,分层的
+immutable,不变的
+imperative,命令式
+incentive,激励的，刺激的
+indecisive,犹豫不决的
+intermittent,间歇的
+intrusive,侵入式的
+intuitive,直觉的
+manually,手动的
+mature,成熟的
+mediocre,普通的，平凡的
+miscellaneous,混杂、各式各样的
+mutable,可变的
+on-premise,预置的
+periodically,定期地，周期性地
+permanent,永久的
+permissive,宽容的
+rapid,迅速的、飞快的
+redacted,经过编辑的
+resilient,有弹力的、能恢复的
+respective,分别的，各自的
+retrospective,追溯的、回顾的、复盘的
+robust,强健的，顽健的
+seamless,无缝的
+semantic,语义的
+significant,重大的，有意义的
+sophisticated,复杂的、富有经验的
+standalone,单独的
+substantial,实质的
+subtle,微小（但重要）的
+sustainable,可持续的
+symmetric,对称的
+synchronous,同步的
+thrilled,非常兴奋的
+underlying,在下面的
+implicit,含蓄的、含糊不清的
+aggregate,聚合，整合
+allocate,分配
+analyze,分析
+capture,捕捉、抓取
+concatenate,连接
+decouple,使分离
+differentiate,区别
+embrace,拥抱、接受
+encapsulate,压缩、封装
+escalate,升级
+impersonate,扮演，模仿
+introspect,自解析，自省
+leverage,借用、利用
+marry,结合、联合
+monetize,货币化
+optimize,优化
+populate,输入数据
+ratify,批准，认可
+reconcile,调停，调解，顺从
+rectify,改正，修正，纠正
+retain,保持
+revisit,再访，再议
+streamline,使现代化、流线，使合理化
+undertake,承担
+aggregation,聚合
+agility,敏捷，灵活
+amortization,摊销
+analogy,类比，比喻
+architecture,架构
+ascent,上升，升序
+aspect,方面，方向
+authentication,身份验证
+authorization,授权，认可
+automation,自动化
+bandwidth,带宽，多余时间（人力）
+bogus,假的，伪造
+bottleneck,瓶颈
+capacity,能力、容量
+caveats,注意事项
+cluster,集群
+complexity,复杂性
+compliance,合规
+compromise,泄漏，破解
+confidentiality,保密性
+constant,常数，恒量
+constraint,约束
+consumption,消耗
+contrast,对比
+degradation,降级
+delivery,交付
+depreciation,折旧，贬值
+descent,下降，降序
+disclaimer,免责声明
+distinction,区别、差别
+durability,持久性，耐用性
+efficiency,效率
+elasticity,弹性，灵活性
+encryption,加密
+equivalent,对等的人（或事物）；
+evaluation,评价，计算
+evolution,进化、演变
+expenditure,支出，经费
+failback,自动恢复
+failover,失效转移
+federation,联合授权
+homebrew,自制程序
+hypervisor,虚拟机器监视器（VMM）
+hypothesis,假设
+impact,绩效，影响
+impression,曝光
+inception,起始，创立
+incident,事故
+infrastructure,基础设施
+initiative,方案、倡议
+integration,集成，整合
+integrity,完整性
+interaction,交互、相互影响、干涉
+intervention,介入、干涉
+latency,延迟
+malware,恶意软件
+mechanism,机制，原理
+metrics,数据指标
+model,模型
+module,模块
+notation,注释、标注
+occasion,场合、机会
+optimization,优化
+overhead,额外开销，虚耗
+oversight,疏忽、失察
+permutation,排序
+polyfill,填充物
+post-mortem,尸体解剖，事后反思（或剖析）
+priority,优先次序
+privilege,特权，优待
+protocol,协议
+provision,规定；预备；准备
+recursion,递归
+redundancy,冗余，多余
+reliability,可靠性
+replica,复制物
+resilience,回弹性
+restriction,限制，约束
+scalability,可扩展性
+scenario,场景
+scheduler,时间调度程序
+schema,提要，纲要，架构
+scope,范围
+severity,严重性
+strength,优势
+stroke,笔画
+subsidiary,子公司
+takeaway,收获、学到什么
+tenancy,租期
+tentative,假设，试验
+threshold,阈值
+throughput,吞吐量
+tolerance,容忍
+traceability,可追溯性
+trajectory,轨道，轨迹
+traversal,遍历
+tweak,扭，调整
+utilization,利用，使用
+vulnerability,易损性，弱点
+workaround,变通方案
+alphabetically,按字母顺序排列地
+furthermore,此外，而且
+simultaneously,同时地
+ampersand,和
+angle brackets,尖括号
+asterisk,星号
+at,邮件符号
+backslash,反斜线
+caret,折音号
+colon,冒号
+comma,逗号
+curly brackets,花括号
+dash,破折号
+dollar sign,美元符号
+double quotation mark,双引号
+downwards arrow,向下箭头
+ellipsis,省略号
+equal,等于号
+exclamation mark,惊叹号，感叹号
+greater than,大于号
+hash,井号
+hyphen,连字符
+left arrow,向左箭头
+less than,小于号
+minus,减号
+parenthesis,圆括号
+percent,百分号
+period,句号
+plus,加号
+question mark,问号
+right arrow,向右箭头
+section,分节号
+semicolon,分号
+single quotation mark,单引号
+slash,斜线号
+square brackets,方括号
+tilde,波浪号
+underscore,下划线
+upwards arrow,向上箭头
+catastrophic failover,灾难性故障转移
+data sovereignty,数据主权
+dead letter queue,死信队列
+faceted search,分面搜索
+false positive,假阳性
+fault tolerance,
+magnetic storage,磁储存
+roll off,TBD
+roll out,TBD
+strangler pattern,绞杀者模式
+under the hood,引擎罩下，比喻内幕、原理
+vice versa,反之亦然
+CLI,命令行界面
+GUI,图形用户界面
+UUID / GUID,全局唯一标识符
+SIT,系统整合测试
+UAT,用户验收测试
 
