@@ -40,6 +40,7 @@ const SuperCard = ({ material, needLearn }) => {
             >
               ${material.text}
             </div>
+            <span style="color: #2796f8;">${material.youdao.basic&&material.youdao.basic['exam_type'] ? '[' + material.youdao.basic['exam_type'][0] + ']' : ''}</span>
             ${needLearn
               ? ''
               : html`<div
