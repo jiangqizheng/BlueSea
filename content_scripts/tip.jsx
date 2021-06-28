@@ -217,6 +217,7 @@ function makeTipEl(root, options, isBottom) {
                   fill="#666"
                 ></path>
               </svg>
+              <span style="margin-left: 8px;color: #2796f8;">${tfData.basic&&tfData.basic['exam_type'] ? '[' + tfData.basic['exam_type'][0] + ']' : ''}</span>
             </div>`
           : ''}
 
