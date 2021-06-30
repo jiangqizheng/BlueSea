@@ -1,19 +1,16 @@
 import { render, unmountComponentAtNode } from 'react-dom';
 import React, { useEffect, useState } from 'react';
 import { Displacy } from './analysis_displacy';
-// import nlpData from './nlp_data.json';
 import iconClose from './icon-close.png';
+import {noio} from '../io'
 
 function makeAnalysisEl(root, options) {
   const App = () => {
     const [data, setData] = useState(null);
     useEffect(() => {
-      chrome.runtime.sendMessage(
-        { type: 'nlp', payload: options.text },
-        (r) => {
-          setData(r);
-        }
-      );
+      noio.nlp(options.text, {auto: false}).then((rt) => {
+        setData(rt)
+      })
     }, []);
 
     if (!data) {

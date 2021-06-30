@@ -1,7 +1,9 @@
 import { isYTL } from '../common';
-import { bluesea, funCtrl } from '../logic';
-import { axTip } from './tooltip';
-import dayjs from 'dayjs';
+import { noio } from '../io';
+import { materialStore } from '../store';
+import { fnConfig } from '../fnConfig';
+import { tip, Translation } from './tip';
+import React from 'react';
 
 // 跳过特殊的节点
 const isSpecialEl = (el) => {
@@ -11,6 +13,15 @@ const isSpecialEl = (el) => {
   }
   return false;
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('触发词频统计');
+  setTimeout(async () => {
+    const nodes = document.querySelectorAll(`xmark[data-marked="true"]`);
+    const ids = Array.from(new Set([...nodes].map((it) => it.dataset.id)));
+    // wordStore.syncFrequency(ids);
+  }, 10000);
+});
 
 const dFSTraverse = (rootNodes, result = []) => {
   const roots = Array.from(rootNodes);
@@ -39,12 +50,8 @@ const forLowerCase = (text) => {
   return text.toLowerCase();
 };
 
-const calcEls = (a, b) => {
-  return new Promise((resolve) => {
-    chrome.runtime.sendMessage({ type: 'calcEls', payload: [a, b] }, (r) => {
-      resolve(r);
-    });
-  });
+const calcEls = async (a, b) => {
+  return noio.calcEls([a, b], { auto: false });
 };
 
 const forReadyNodes = async (materialList) => {
@@ -199,7 +206,7 @@ const forReadyNodes = async (materialList) => {
     }, []);
 };
 
-const handleHighlighter = (nodes, hasZhNote) => {
+const handleHighlighter = (nodes, annotation) => {
   nodes.forEach((it) => {
     if (!(it.node.parentNode && it.node.parentNode.replaceChild)) {
       return;
@@ -207,7 +214,8 @@ const handleHighlighter = (nodes, hasZhNote) => {
     const markWrap = document.createElement('xmark');
     markWrap.appendChild(it.node.cloneNode(false));
 
-    if (hasZhNote) {
+    if (annotation) {
+      // 词意优先级设置，v->vt->n->
       markWrap.setAttribute('style', 'position: relative;');
       const t = document.createElement('xmarksub');
       t.innerText = it.material.translation;
@@ -222,6 +230,7 @@ const handleHighlighter = (nodes, hasZhNote) => {
     it.node.parentNode.replaceChild(markWrap, it.node);
     markWrap.classList.add('bluesea', 'gloab-xmark', 'notranslate');
     markWrap.setAttribute(`data-text`, it.material.text);
+    markWrap.setAttribute(`data-id`, it.material.id);
     markWrap.setAttribute(`data-marked`, true);
 
     let clearTime = null;
@@ -231,34 +240,26 @@ const handleHighlighter = (nodes, hasZhNote) => {
       clearTimeout(clearTime);
 
       time2 = setTimeout(() => {
-        const tipRoot = axTip.render(markWrap.getBoundingClientRect(), {
-          isExist: true,
-          text: it.material.text,
-          onCancelMark: () => {
-            document
-              .querySelectorAll(`xmark[data-marked="true"]`)
-              .forEach((el) => {
-                const text = document.createTextNode(el.innerText);
-                const p = el.parentNode;
-                p.replaceChild(text, el);
-                p.normalize();
-              });
-            axTip.clear();
-          },
+        const tipRoot = tip.render({
+          root: markWrap,
+          component: (
+            <Translation text={it.material.text} id={markWrap.dataset.id} />
+          ),
+          name: 'bluesea-highlighter-tip',
         });
 
         tipRoot.addEventListener('mouseenter', () => {
           clearTimeout(clearTime);
         });
         tipRoot.addEventListener('mouseleave', () => {
-          axTip.clear();
+          tip.clear('bluesea-highlighter-tip');
         });
       }, 400); // 后续设置为可配置
     });
     markWrap.addEventListener('mouseleave', (e) => {
       clearTimeout(time2);
       clearTime = setTimeout(() => {
-        axTip.clear();
+        tip.clear('bluesea-highlighter-tip');
       }, 400);
     });
   });
@@ -274,72 +275,47 @@ const debounce = (fn) => {
   };
 };
 
-const handleStatistics = debounce(async () => {
-  const nodes = document.querySelectorAll(`xmark[data-marked="true"]`);
-  const kList = [...nodes].reduce((pre, cur) => {
-    const text = cur.dataset.text;
-    const obj = pre.find((it) => it.text === text);
-    if (obj) {
-      obj.count += 1;
-      return pre;
-    } else {
-      return [...pre, { text, count: 1 }];
-    }
-  }, []);
-
-  const l = await bluesea.getMaterials();
-  const today = dayjs().format('YYYY-MM-DD');
-  l.forEach((it) => {
-    const statistic = kList.find((it2) => it2.text === it.text);
-    if (!statistic) {
-      return;
-    }
-
-    if (!it.statistics) {
-      it.statistics = {};
-    }
-    if (!it.statistics[today]) {
-      it.statistics[today] = {};
-    }
-    // 计算最高的那次
-    const oldCount = it.statistics[today][location.href] || 0;
-    it.statistics[today][location.href] =
-      oldCount > statistic.count ? oldCount : statistic.count;
-  });
-  bluesea.setMaterials(l);
-});
-
 class Highlighter {
   targetList = [];
-  config = {};
 
   async render() {
-    this.targetList = await bluesea.getMaterials();
+    // this.targetList = await bluesea.getMaterials();
+    this.targetList = await materialStore.getList();
+
+    // console.log('targetList', this.targetList);
+    const l = this.targetList.map((it) => ({
+      ...it,
+      id: it.material.id,
+      text: it.text,
+      translation: it.translation,
+    }));
+    // this.targetList = []
+    // const l = []
     // textExts
-    const l = this.targetList.reduce((pre, cur) => {
-      if (cur.textExts) {
-        const l2 = cur.textExts.map((it) => ({
-          ...cur,
-          text: it,
-          originalText: cur.text,
-        }));
-        return [...pre, ...l2, cur];
-      } else {
-        return [...pre, cur];
-      }
-    }, []);
+    // const l = this.targetList.reduce((pre, cur) => {
+    //   if (cur.textExts) {
+    //     const l2 = cur.textExts.map((it) => ({
+    //       ...cur,
+    //       text: it,
+    //       originalText: cur.text,
+    //     }));
+    //     return [...pre, ...l2, cur];
+    //   } else {
+    //   return [...pre, cur];
+    //   }
+    // }, []);
     let nodes = await forReadyNodes(l);
 
-    // textExts
-    nodes.forEach((it) => {
-      if (it.material.originalText) {
-        it.material.text = it.material.originalText;
-      }
-    });
+    // textExts, 变形暂时不处理
+    // nodes.forEach((it) => {
+    //   if (it.material.originalText) {
+    //     it.material.text = it.material.originalText;
+    //   }
+    // });
 
-    handleHighlighter(nodes, this.config['中文注解']);
+    handleHighlighter(nodes, this.conf.annotation);
 
-    handleStatistics();
+    // handleStatistics();
   }
   handleClear(nodes) {
     nodes.forEach((el) => {
@@ -361,13 +337,26 @@ class Highlighter {
         (material) => material.text === it.dataset.text
       );
     });
-    this.handleClear(l);
+    // 清除临时添加的
+
+    this.handleClear([...l]);
+
+    // 将tmp替换为正确id
+    const tmps = document.querySelectorAll(`xmark[data-id="tmp"]`);
+    tmps.forEach((it) => {
+      const word = this.targetList.find((it2) => it2.text === it.dataset.text);
+      if (!word) {
+        return;
+      }
+      it.dataset.id = word.id;
+    });
   }
-  async initData() {
-    this.config = await bluesea.getConfig();
+  async initData(conf) {
+    this.conf = conf;
   }
 
   watch() {
+    console.log('start watch');
     this.watchTimer = setInterval(async () => {
       this.render();
     }, 4 * 1000);
@@ -389,20 +378,18 @@ class Highlighter {
     //   this.observer.observe(document, config);
     // });
     // this.observer.observe(document, config);
-    chrome.storage.onChanged.addListener(this.onMaterialListChange);
+
+    this.unWatch = materialStore.db.watch((l) => {
+      console.log('highlighter -- watch');
+      // console.log('l', l)
+      this.targetList = l;
+      this.smartClear();
+      this.render();
+    });
   }
-  onMaterialListChange = (changes, namespace) => {
-    if (namespace === 'local' && changes['materials']) {
-      if (changes['materials'].newValue.length !== this.targetList.length) {
-        this.targetList = changes['materials'].newValue;
-        this.smartClear();
-        this.render();
-      }
-    }
-  };
+
   stopWatch() {
-    // this.observer.disconnect();
-    chrome.storage.onChanged.removeListener(this.onMaterialListChange);
+    this.unWatch();
     clearInterval(this.watchTimer);
     this.clear();
   }
@@ -411,15 +398,15 @@ class Highlighter {
 const highlighter = new Highlighter();
 
 document.addEventListener('DOMContentLoaded', () => {
-  funCtrl.run(
-    '单词高亮',
-    async () => {
-      await highlighter.initData();
+  fnConfig.run(async (conf) => {
+    if (conf.highlight) {
+      console.log('hh11');
+      await highlighter.initData(conf);
       highlighter.render();
       highlighter.watch();
-    },
-    () => {
-      highlighter.stopWatch();
+      return () => {
+        highlighter.stopWatch();
+      };
     }
-  );
+  });
 });

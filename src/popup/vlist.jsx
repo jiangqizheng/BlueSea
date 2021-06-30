@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-const l = Array.from({ length: 10 }, (v, k) => ({ text: k, isTmp: true }));
+const l = Array.from({ length: 1 }, (v, k) => ({ text: k, isTmp: true }));
 const wh = 382;
 const h = 42;
 
 export const Vlist = ({ source, children }) => {
   let list = source;
-  let defaultIndex = 0;
-  if (source.length > Math.ceil(wh / h)) {
+  let defaultIndex = 1;
+  // if (source.length > Math.ceil(wh / h)) {
     list = [...l, ...source];
-    defaultIndex = 10;
-  }
+    defaultIndex = 1;
+  // }
 
   const [si, setSI] = useState(defaultIndex);
 

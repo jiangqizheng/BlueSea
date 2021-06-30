@@ -12,7 +12,8 @@
     "webRequestBlocking",
     "browsingData",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "cookies"
   ],
   "browser_action": {
     "default_popup": "popup.html",
@@ -21,6 +22,7 @@
   "background": {
     "scripts": ["js/hot_reload.js", "js/background.js"]
   },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "content_scripts": [
     {
       "all_frames": false,
@@ -30,5 +32,5 @@
       "run_at": "document_start"
     }
   ],
-  "web_accessible_resources": ["*.htm", "*.html", "*.js", "*.css"]
+  "web_accessible_resources": ["*.htm", "*.html", "*.js", "*.css", "inject.js"]
 }

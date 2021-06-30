@@ -1,26 +1,8 @@
 import { render, unmountComponentAtNode } from 'react-dom';
 import React, { useEffect, useState, useRef } from 'react';
-import { bluesea } from '../logic';
 import { axAnalysis } from './analysis';
-
-// 注册html组件
-document.addEventListener('DOMContentLoaded', () => {
-  fetch(chrome.runtime.getURL('d-loading.htm'))
-    .then((raw) => raw.text())
-    .then((res) => {
-      let fragment = document.createElement('div');
-      fragment.innerHTML = res;
-      class DLoading extends HTMLElement {
-        constructor() {
-          super();
-          var shadow = this.attachShadow({ mode: 'closed' });
-          var content = fragment.childNodes[0].content.cloneNode(true);
-          shadow.appendChild(content);
-        }
-      }
-      window.customElements.define('d-loading', DLoading);
-    });
-});
+// import { wordStore, materialStore } from '../store';
+import { fnConfig } from '../fnConfig';
 
 function setPos(boxWrap, rangeRect) {
   // 设定位置
@@ -103,16 +85,14 @@ function makeTipEl(root, options, isBottom) {
       // );
 
       if (ableTranslation) {
-        chrome.runtime.sendMessage(
-          { type: 'tf', payload: options.text },
-          (r) => {
-            setTfData(r);
-          }
-        );
+        // wordStore.getOne(options.text).then((rt) => {
+        //   setTfData(rt);
+        // });
+        // noio.tf(options.text).then((rt) => {
+        //   setTfData(rt);
+        // });
       }
     }, [ableTranslation]);
-
-    const config = bluesea.useConfig();
 
     if (!ableTranslation) {
       return (
@@ -165,7 +145,7 @@ function makeTipEl(root, options, isBottom) {
       );
     }
 
-    if (!tfData || !config) {
+    if (!tfData) {
       return (
         <div
           style={{
@@ -201,15 +181,15 @@ function makeTipEl(root, options, isBottom) {
     return (
       <div className="bluesea-tip notranslate" translate="no">
         {isOneWord ? (
-          config['自动发音'] ? (
+          fnConfig.autoSpeech ? (
             <audio
-              src={`https://dict.youdao.com/dictvoice?audio=${tfData.query}`}
+              src={`https://dict.youdao.com/dictvoice?audio=${tfData.word}`}
               ref={audioRef}
               autoPlay={true}
             ></audio>
           ) : (
             <audio
-              src={`https://dict.youdao.com/dictvoice?audio=${tfData.query}`}
+              src={`https://dict.youdao.com/dictvoice?audio=${tfData.word}`}
               ref={audioRef}
               preload="true"
             ></audio>
@@ -221,7 +201,7 @@ function makeTipEl(root, options, isBottom) {
           {isOneWord ? (
             <div className="bluesea-tip-row">
               <div style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                {tfData.returnPhrase ? tfData.returnPhrase[0] : tfData.query}
+                {tfData.word}
               </div>
               <svg
                 style={{
@@ -255,56 +235,36 @@ function makeTipEl(root, options, isBottom) {
           )}
 
           <div>
-            {tfData.basic && tfData.basic['uk-phonetic'] ? (
-              <div className="bluesea-tip-row">
-                <span>
-                  <span>英</span>
-                  <span style={{ color: '#f00', marginLeft: '2px' }}>
-                    [{forPhonetic(tfData.basic['uk-phonetic'])}]
-                  </span>
+            <div className="bluesea-tip-row">
+              <span>
+                <span>英</span>
+                <span style={{ color: '#f00', marginLeft: '2px' }}>
+                  [{forPhonetic(tfData.phonetic)}]
                 </span>
-                <span style={{ marginLeft: '8px' }}>
-                  <span>美</span>
-                  <span style={{ color: '#f00', marginLeft: '2px' }}>
-                    [{forPhonetic(tfData.basic['us-phonetic'])}]
-                  </span>
-                </span>
-              </div>
-            ) : (
-              ''
-            )}
-
+              </span>
+            </div>
             <div style={{ height: 4 }}></div>
-            {tfData.basic
-              ? tfData.basic.explains.map((it) => {
-                  return (
-                    <div className="bluesea-tip-row" key={it}>
-                      {it}
-                    </div>
-                  );
-                })
-              : tfData.translation.map((it) => {
-                  return (
-                    <div className="bluesea-tip-row" key={it}>
-                      {it}
-                    </div>
-                  );
-                })}
+            <div className="bluesea-tip-row">{tfData.translation}</div>
           </div>
         </div>
 
-        {options.isExist ? (
+        {options.wordId ? (
           <div className="bluesea-tip-row">
             <div style={{ flex: '1' }}></div>
             <div className="bluesea-tip-btn-wrap">
               <div
                 className="bluesea-tip-btn"
-                style={{ color: '#888', cursor: 'not-allowed' }}
                 onClick={() => {
-                  axAnalysis.render({text: options.text, translation: tfData.translation[0]});
+                  // axAnalysis.render({
+                  //   text: options.text,
+                  //   translation: tfData.translation[0],
+                  // });
+                  //处理为归档，通常情况下不做删除
+                  // wordStore.delOne({ id: options.wordId, text: options.text });
+                  axTip.clear();
                 }}
               >
-                解析
+                归档
               </div>
             </div>
           </div>
@@ -316,7 +276,10 @@ function makeTipEl(root, options, isBottom) {
                 className="bluesea-tip-btn"
                 style={{ color: '#888', cursor: 'not-allowed' }}
                 onClick={() => {
-                  axAnalysis.render({text: options.text, translation: tfData.translation[0]});
+                  axAnalysis.render({
+                    text: options.text,
+                    // translation: tfData.translation[0],
+                  });
                 }}
               >
                 解析
@@ -332,7 +295,8 @@ function makeTipEl(root, options, isBottom) {
                 className="bluesea-tip-btn"
                 onClick={() => {
                   if (isOneWord) {
-                    options.onMark(tfData);
+                    // wordStore.addOne(options.text);
+                    selectedAxTip.clear();
                   }
                 }}
               >

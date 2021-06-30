@@ -78,7 +78,7 @@ body,
   background: rgba(62, 138, 243, 0.06);
 }
 .word-row:hover .word-options {
-  display: block;
+  display: inline-block;
 }
 
 .word-row:hover .word-infos {

@@ -15,3 +15,14 @@ export const isYTL = (el) => {
     }
   }
 };
+
+// 在某个元素内
+export const inEl = (el, elNames = []) => {
+  if (!el || !el.nodeName) {
+    return false;
+  }
+  if (elNames.includes(el.nodeName)) {
+    return true;
+  }
+  return inEl(el.parentNode, elNames);
+};

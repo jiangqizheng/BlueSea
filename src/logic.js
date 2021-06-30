@@ -31,7 +31,7 @@ class Storage {
         });
       } catch (e) {
         console.error(e);
-        location.href = location.href;
+        // location.href = location.href;
       }
     });
   }

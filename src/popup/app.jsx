@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageSearch } from './p_search.jsx';
 import { PageSetting } from './p_setting.jsx';
-import { PageMaterial } from './p_material.jsx'
+import { PageMaterial } from './p_material.jsx';
 
 const TabItemMap = {
   Search: {
@@ -11,10 +11,6 @@ const TabItemMap = {
   Material: {
     key: 'Material',
     Component: PageMaterial,
-  },
-  Sentence: {
-    key: 'Sentence',
-    Component: () => '开发中...',
   },
   Setting: {
     key: 'Setting',
@@ -34,11 +30,6 @@ export const App = () => {
     {
       label: '单词',
       key: TabItemMap.Material.key,
-      icons: ['/imgs/tab-library-off.png', '/imgs/tab-library-on.png'],
-    },
-    {
-      label: '句子',
-      key: TabItemMap.Sentence.key,
       icons: ['/imgs/tab-library-off.png', '/imgs/tab-library-on.png'],
     },
     {

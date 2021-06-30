@@ -5,8 +5,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  // mode: 'development',
-  mode: 'production',
+  mode: 'development',
+  // mode: 'production',
   entry: {
     popup: './src/popup/index.jsx',
     content_scripts: './src/content_scripts/index.js',
@@ -24,10 +24,10 @@ module.exports = {
     // contentBase: './dist',
     writeToDisk: true,
     port: 9000,
-    disableHostCheck: true, 
+    disableHostCheck: true,
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
   },
   module: {
     rules: [
@@ -37,6 +37,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
+            '@babel/preset-typescript',
             [
               '@babel/preset-env',
               {
@@ -46,7 +47,18 @@ module.exports = {
             ],
             '@babel/preset-react',
           ],
-          plugins: [['@babel/plugin-proposal-class-properties']],
+          plugins: [
+            ['@babel/plugin-proposal-decorators', { legacy: true }],
+            ['@babel/plugin-proposal-class-properties', { loose: true }],
+            // ['babel-plugin-root-import', { root: './src' }],
+            [
+              'module-resolver',
+              {
+                root: ['./src'],
+                extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
+              },
+            ],
+          ],
         },
       },
       {
