@@ -140,7 +140,8 @@ git clone https://github.com/jiangqizheng/BlueSea
 * 导入，支持 .json 与 .txt 导入，具体格式参考导出的数据（使用 .txt 进行导入时，因为需要拉取每个单词的翻译信息所以会比较慢，并在导入期间内，不要进行其他操作）。
 * 关于性能，已测试在一个页面内最多标记 100+ 单词。单词本中测试收录 5000+ 单词，后续增加分组功能，缓解性能压力。
 * 翻译提示窗部分样式参考 [ChaZD](https://chrome.google.com/webstore/detail/chazd/nkiipedegbhbjmajlhpegcpcaacbfggp)
-
+* 如果出现Chrome卡顿的情况，进入「管理拓展程序」-「BlueSea 详情」关闭「收集各项错误」
+![stop collect error](./images/关闭错误收集.png)
 
 ## 更新日志
 
