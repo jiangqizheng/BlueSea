@@ -262,6 +262,7 @@ const handleHighlighter = (nodes, hasZhNote) => {
                 p.normalize();
               });
             axTip.clear();
+            bluesea.delMaterial(it.material.text);
           },
         });
 
