@@ -262,6 +262,20 @@ function makeTipEl(root, options, isBottom) {
               >
                 编辑
               </div>
+              <div
+                style=${{
+                  color: !isOneWord && '#888',
+                  cursor: !isOneWord && 'not-allowed',
+                }}
+                class="bluesea-tip-btn"
+                onclick=${() => {
+                  if (isOneWord) {
+                    options.onCancelMark();
+                  }
+                }}
+              >
+                删除
+              </div>
             </div>
           </div>`
         : html`<div class="bluesea-tip-row">
